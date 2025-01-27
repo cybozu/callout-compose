@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "callout-compose"
-include(":app")
+include(":sample-app")
  
