@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.callout.compose.android.library)
     alias(libs.plugins.callout.compose.jetpack.compose.core)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -8,6 +10,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.material)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     testImplementation(libs.junit)
