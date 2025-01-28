@@ -1,4 +1,4 @@
-package com.cybozu.android.callout.compose.ui.theme
+package com.cybozu.android.callout.compose.sampleapp.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

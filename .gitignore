@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+#k2
+.kotlin
+
 # Local configuration file (sdk path, etc)
 local.properties
 
