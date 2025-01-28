@@ -1,6 +1,7 @@
 package com.cybozu.android.callout.compose.core
 
 import androidx.compose.runtime.Composable
+import com.cybozu.android.callout.compose.core.data.AlignmentContext
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
 import com.cybozu.android.callout.compose.core.data.HorizontalAlignment
 import com.cybozu.android.callout.compose.core.data.VerticalAlignment
@@ -10,13 +11,15 @@ public fun BasicCallout(
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
     verticalAlignment: VerticalAlignment.Over,
-    horizontalAlignment: HorizontalAlignment,
+    horizontalAlignment: HorizontalAlignment.Inner,
 ) {
     BasicCalloutImpl(
         calloutState = calloutState,
         calloutProperties = calloutProperties,
-        verticalAlignment = verticalAlignment,
-        horizontalAlignment = horizontalAlignment
+        alignmentContext = AlignmentContext(
+            vertical = verticalAlignment,
+            horizontal = horizontalAlignment
+        )
     )
 }
 
@@ -24,14 +27,16 @@ public fun BasicCallout(
 public fun BasicCallout(
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
-    verticalAlignment: VerticalAlignment,
+    verticalAlignment: VerticalAlignment.Inner,
     horizontalAlignment: HorizontalAlignment.Over,
 ) {
     BasicCalloutImpl(
         calloutState = calloutState,
         calloutProperties = calloutProperties,
-        verticalAlignment = verticalAlignment,
-        horizontalAlignment = horizontalAlignment
+        alignmentContext = AlignmentContext(
+            vertical = verticalAlignment,
+            horizontal = horizontalAlignment
+        )
     )
 }
 
@@ -39,7 +44,6 @@ public fun BasicCallout(
 private fun BasicCalloutImpl(
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
-    verticalAlignment: VerticalAlignment,
-    horizontalAlignment: HorizontalAlignment,
+    alignmentContext: AlignmentContext,
 ) {
 }
