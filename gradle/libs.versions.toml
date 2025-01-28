@@ -45,6 +45,9 @@ androidx-test-ext-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx",
 composable-preview-scanner = { group = "io.github.sergio-sastre.ComposablePreviewScanner", name = "android", version = "0.5.0" }
 roborazzi-compose-preview = { group = "io.github.takahirom.roborazzi", name = "roborazzi-compose-preview-scanner-support", version.ref = "roborazzi" }
 
+# Desugar
+desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.4" }
+
 # import for build-logic
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -67,7 +70,8 @@ roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
 
 callout-compose-android-application = { id = "com.cybozu.callout.compose.android.application" }
 callout-compose-android-library = { id = "com.cybozu.callout.compose.android.library" }
-callout-compose-android-screenshot-test = { id = "com.cybozu.callout.screenshot.test" }
+callout-compose-jetpack-compose-core = { id = "com.cybozu.callout.jetpack.compose.core" }
+callout-compose-screenshot-test = { id = "com.cybozu.callout.screenshot.test" }
 
 [bundles]
 robolectric-junit-test = [
