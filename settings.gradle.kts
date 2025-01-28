@@ -1,4 +1,6 @@
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             content {
@@ -21,4 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "callout-compose"
 include(":sample-app")
- 
