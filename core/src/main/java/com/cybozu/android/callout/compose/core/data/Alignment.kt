@@ -1,55 +1,67 @@
 package com.cybozu.android.callout.compose.core.data
 
-public sealed interface Alignment
+public sealed interface Alignment {
+    public sealed class Vertical : Alignment {
+        public sealed class Inner : Vertical()
+        public sealed class Over : Vertical()
 
-public sealed interface VerticalAlignment : Alignment {
-    public sealed interface Inner : VerticalAlignment
-    public sealed interface Over : VerticalAlignment
+        public data object Top : Inner() {
+            public fun over(): Over = TopOver
+        }
 
-    public data object Top : Inner
-    public data object TopOver : Over
-    public data object Center : Inner
-    public data object Bottom : Inner
-    public data object BottomOver : Over
-}
+        public data object Center : Inner()
+        public data object Bottom : Inner() {
+            public fun over(): Over = BottomOver
+        }
 
-public sealed interface HorizontalAlignment : Alignment {
-    public sealed interface Inner : HorizontalAlignment
-    public sealed interface Over : HorizontalAlignment
+        internal data object TopOver : Over()
+        internal data object BottomOver : Over()
+    }
 
-    public data object Start : Inner
-    public data object StartOver : Over
-    public data object Center : Inner
-    public data object End : Inner
-    public data object EndOver : Over
+    public sealed class Horizontal : Alignment {
+        public sealed class Inner : Horizontal()
+        public sealed class Over : Horizontal()
+
+        public data object Start : Inner() {
+            public fun over(): Over = StartOver
+        }
+
+        public data object Center : Inner()
+        public data object End : Inner() {
+            public fun over(): Over = EndOver
+        }
+
+        internal data object StartOver : Over()
+        internal data object EndOver : Over()
+    }
 }
 
 internal sealed interface AlignmentContext {
-    val vertical: VerticalAlignment
-    val horizontal: HorizontalAlignment
+    val vertical: Alignment.Vertical
+    val horizontal: Alignment.Horizontal
 
     data class VerticalOver(
-        override val vertical: VerticalAlignment.Over,
-        override val horizontal: HorizontalAlignment.Inner,
+        override val vertical: Alignment.Vertical.Over,
+        override val horizontal: Alignment.Horizontal.Inner,
     ) : AlignmentContext
 
     data class HorizontalOver(
-        override val vertical: VerticalAlignment.Inner,
-        override val horizontal: HorizontalAlignment.Over,
+        override val vertical: Alignment.Vertical.Inner,
+        override val horizontal: Alignment.Horizontal.Over,
     ) : AlignmentContext
 }
 
 internal fun AlignmentContext(
-    vertical: VerticalAlignment.Over,
-    horizontal: HorizontalAlignment.Inner,
+    vertical: Alignment.Vertical.Over,
+    horizontal: Alignment.Horizontal.Inner,
 ): AlignmentContext = AlignmentContext.VerticalOver(
     vertical = vertical,
     horizontal = horizontal
 )
 
 internal fun AlignmentContext(
-    vertical: VerticalAlignment.Inner,
-    horizontal: HorizontalAlignment.Over,
+    vertical: Alignment.Vertical.Inner,
+    horizontal: Alignment.Horizontal.Over,
 ): AlignmentContext = AlignmentContext.HorizontalOver(
     vertical = vertical,
     horizontal = horizontal
