@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.geometry.Size
 
-public interface CalloutState {
+public sealed interface CalloutState {
     public fun show()
     public fun hide()
 }
@@ -20,12 +20,12 @@ internal class CalloutStateImpl(
         private set
 
     val isAnchored by derivedStateOf {
-        parentSize != null && targetPositionInWindow != null && targetRectInParent != null
+        parentSize != null && anchorPositionInWindow != null && anchorRectInParent != null
     }
 
-    var parentSize: IntSize? by mutableStateOf(null)
-    var targetPositionInWindow: Offset? by mutableStateOf(null)
-    var targetRectInParent: Rect? by mutableStateOf(null)
+    var parentSize: Size? by mutableStateOf(null)
+    var anchorPositionInWindow: Offset? by mutableStateOf(null)
+    var anchorRectInParent: Rect? by mutableStateOf(null)
 
     override fun show() {
         isVisible = true

@@ -7,7 +7,7 @@ import com.cybozu.android.callout.compose.core.data.CalloutProperties
 
 @Composable
 public fun BasicCallout(
-    localContentColorProvider: LocalContentColorProvider = DefaultLocalContentColorProvider(),
+    contentColorProvider: LocalContentColorProvider = DefaultLocalContentColorProvider(),
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
     verticalAlignment: Alignment.Vertical.Over,
@@ -16,7 +16,7 @@ public fun BasicCallout(
     content: @Composable () -> Unit,
 ) {
     BasicCalloutImpl(
-        localContentColorProvider = localContentColorProvider,
+        contentColorProvider = contentColorProvider,
         calloutState = calloutState,
         calloutProperties = calloutProperties,
         alignmentContext = AlignmentContext(
@@ -30,7 +30,7 @@ public fun BasicCallout(
 
 @Composable
 public fun BasicCallout(
-    localContentColorProvider: LocalContentColorProvider = DefaultLocalContentColorProvider(),
+    contentColorProvider: LocalContentColorProvider = DefaultLocalContentColorProvider(),
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
     verticalAlignment: Alignment.Vertical.Inner,
@@ -39,7 +39,7 @@ public fun BasicCallout(
     content: @Composable () -> Unit,
 ) {
     BasicCalloutImpl(
-        localContentColorProvider = localContentColorProvider,
+        contentColorProvider = contentColorProvider,
         calloutState = calloutState,
         calloutProperties = calloutProperties,
         alignmentContext = AlignmentContext(
@@ -53,16 +53,11 @@ public fun BasicCallout(
 
 @Composable
 private fun BasicCalloutImpl(
-    localContentColorProvider: LocalContentColorProvider,
+    contentColorProvider: LocalContentColorProvider,
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
     alignmentContext: AlignmentContext,
     onDismissRequest: (() -> Unit)?,
     content: @Composable () -> Unit,
 ) {
-    localContentColorProvider.Provide(
-        contentColor = calloutProperties.contentColor
-    ) {
-        content()
-    }
 }

@@ -21,7 +21,7 @@ public fun Callout(
     content: @Composable () -> Unit,
 ) {
     BasicCallout(
-        localContentColorProvider = Material3LocalContentColorProvider,
+        contentColorProvider = Material3LocalContentColorProvider,
         calloutState = calloutState,
         calloutProperties = calloutProperties,
         verticalAlignment = verticalAlignment,
@@ -45,7 +45,7 @@ public fun Callout(
     content: @Composable () -> Unit,
 ) {
     BasicCallout(
-        localContentColorProvider = Material3LocalContentColorProvider,
+        contentColorProvider = Material3LocalContentColorProvider,
         calloutState = calloutState,
         calloutProperties = calloutProperties,
         verticalAlignment = verticalAlignment,

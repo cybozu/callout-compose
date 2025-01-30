@@ -6,11 +6,10 @@ import androidx.compose.ui.unit.dp
 
 public data class CalloutProperties(
     val border: BorderProperties,
-    val contentColor: Color,
-    val backgroundColor: Color,
-    val shadowColor: Color,
+    val color: ColorProperties,
     val elevation: Dp,
     val isFocusable: Boolean,
+    val animationDurationMillis: Int,
 ) {
     public constructor(
         borderColor: Color,
@@ -45,11 +44,14 @@ public data class CalloutProperties(
         elevation: Dp,
     ) : this(
         border = BorderProperties(borderColor),
-        contentColor = contentColor,
-        backgroundColor = backgroundColor,
-        shadowColor = shadowColor,
+        color = ColorProperties(
+            contentColor = contentColor,
+            backgroundColor = backgroundColor,
+            shadowColor = shadowColor
+        ),
         elevation = elevation,
-        isFocusable = false
+        isFocusable = false,
+        animationDurationMillis = 500
     )
 }
 
@@ -59,3 +61,9 @@ public data class BorderProperties(
 ) {
     public constructor(color: Color) : this(1.dp, color)
 }
+
+public data class ColorProperties(
+    val contentColor: Color,
+    val backgroundColor: Color,
+    val shadowColor: Color,
+)

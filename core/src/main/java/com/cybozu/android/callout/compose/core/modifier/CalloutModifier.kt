@@ -6,11 +6,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.toSize
+import com.cybozu.android.callout.compose.core.CalloutState
+import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.data.AlignmentContext
 import com.cybozu.android.callout.compose.core.graphic.CalloutShape
-
-public class CalloutModifier
 
 internal fun Modifier.calloutShape(
     anchorSize: Size,
@@ -46,3 +50,15 @@ internal fun Modifier.calloutShape(
             alignment = alignment
         )
     )
+
+internal fun Modifier.anchoredTooltip(
+    calloutState: CalloutState,
+): Modifier = this.onGloballyPositioned { coordinates ->
+    val stateImpl = when (calloutState) {
+        is CalloutStateImpl -> calloutState
+    }
+
+    stateImpl.parentSize = coordinates.parentCoordinates?.size?.toSize()
+    stateImpl.anchorPositionInWindow = coordinates.positionInWindow()
+    stateImpl.anchorRectInParent = coordinates.boundsInParent()
+}
