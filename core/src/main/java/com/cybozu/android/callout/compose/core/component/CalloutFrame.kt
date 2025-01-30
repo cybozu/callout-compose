@@ -10,11 +10,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.window.Popup
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.LocalContentColorProvider
@@ -29,10 +32,12 @@ import com.cybozu.android.callout.compose.core.modifier.calloutShape
 internal sealed interface PopupScope {
     val alignment: Alignment
     val offsetFromBaseline: Offset
+    val isBackgroundTapDisabled: Boolean
     fun dismissRequest()
 }
 
 internal data class PopupScopeImpl(
+    override val isBackgroundTapDisabled: Boolean,
     private val popupLayoutContext: PopupLayoutContext,
     private val state: CalloutState,
     private val onDismissRequest: (() -> Unit)?,
@@ -55,7 +60,7 @@ internal fun CalloutFrame(
     calloutProperties: CalloutProperties,
     alignmentContext: AlignmentContext,
     onDismissRequest: (() -> Unit)?,
-    popUp: @Composable PopupScope.(@Composable () -> Unit) -> Unit,
+    popUp: @Composable PopupScope.(@Composable () -> Unit) -> Unit = { DefaultPopUp(it) },
     content: @Composable () -> Unit,
 ) {
     val stateImpl = when (calloutState) {
@@ -81,6 +86,7 @@ internal fun CalloutFrame(
             anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero
         )
         val popupScope = rememberCalloutFrameScope(
+            isBackgroundTapDisabled = calloutProperties.isFocusable,
             popupLayoutContext = popupLayoutContext,
             state = calloutState,
             onDismissRequest = onDismissRequest
@@ -90,14 +96,39 @@ internal fun CalloutFrame(
                 contentColorProvider.Provide(
                     contentColor = calloutProperties.color.contentColor
                 ) {
+                    CalloutFrameImpl(
+                        modifier = Modifier.alpha(alpha),
+                        density = density,
+                        anchorSize = stateImpl.anchorRectInParent?.size ?: Size.Zero,
+                        calloutProperties = calloutProperties,
+                        calloutLayoutConstraints = calloutLayoutConstraints,
+                        alignmentContext = alignmentContext,
+                        content = content
+                    )
                 }
             }
         }
     }
 }
 
+private fun Offset.toIntOffset(): IntOffset = IntOffset(x.toInt(), y.toInt())
+
+@Composable
+private fun PopupScope.DefaultPopUp(content: @Composable () -> Unit) {
+    Popup(
+        alignment = alignment,
+        offset = offsetFromBaseline.toIntOffset(),
+        onDismissRequest = {
+            dismissRequest()
+        }
+    ) {
+        content()
+    }
+}
+
 @Composable
 private fun CalloutFrameImpl(
+    modifier: Modifier = Modifier,
     density: Density,
     anchorSize: Size,
     calloutProperties: CalloutProperties,
@@ -106,7 +137,7 @@ private fun CalloutFrameImpl(
     content: @Composable () -> Unit,
 ) {
     Box(
-        Modifier
+        modifier
             .calloutShape(
                 anchorSize = anchorSize,
                 alignment = alignmentContext,
@@ -131,11 +162,13 @@ private fun CalloutFrameImpl(
 
 @Composable
 private fun rememberCalloutFrameScope(
+    isBackgroundTapDisabled: Boolean,
     popupLayoutContext: PopupLayoutContext,
     state: CalloutState,
     onDismissRequest: (() -> Unit)?,
 ): PopupScope = remember(state, onDismissRequest) {
     PopupScopeImpl(
+        isBackgroundTapDisabled = isBackgroundTapDisabled,
         popupLayoutContext = popupLayoutContext,
         state = state,
         onDismissRequest = onDismissRequest

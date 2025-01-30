@@ -1,61 +1,60 @@
 package com.cybozu.android.callout.compose.core.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.cybozu.android.callout.compose.core.data.Alignment
 import com.cybozu.android.callout.compose.core.data.AlignmentContext
 import com.cybozu.android.callout.compose.core.data.AlignmentContext.HorizontalOver
 import com.cybozu.android.callout.compose.core.data.AlignmentContext.VerticalOver
-import com.cybozu.android.callout.compose.core.data.HorizontalAlignment
-import com.cybozu.android.callout.compose.core.data.VerticalAlignment
 
 internal class AlignmentPreviewParameterProvider : PreviewParameterProvider<AlignmentContext> {
     override val values: Sequence<AlignmentContext> = sequenceOf(
         VerticalOver(
-            vertical = VerticalAlignment.TopOver,
-            horizontal = HorizontalAlignment.Start
+            vertical = Alignment.Vertical.TopOver,
+            horizontal = Alignment.Horizontal.Start
         ),
         VerticalOver(
-            vertical = VerticalAlignment.TopOver,
-            horizontal = HorizontalAlignment.Center
+            vertical = Alignment.Vertical.TopOver,
+            horizontal = Alignment.Horizontal.Center
         ),
         VerticalOver(
-            vertical = VerticalAlignment.TopOver,
-            horizontal = HorizontalAlignment.End
+            vertical = Alignment.Vertical.TopOver,
+            horizontal = Alignment.Horizontal.End
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Top,
-            horizontal = HorizontalAlignment.StartOver
+            vertical = Alignment.Vertical.Top,
+            horizontal = Alignment.Horizontal.StartOver
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Center,
-            horizontal = HorizontalAlignment.StartOver
+            vertical = Alignment.Vertical.Center,
+            horizontal = Alignment.Horizontal.StartOver
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Bottom,
-            horizontal = HorizontalAlignment.StartOver
+            vertical = Alignment.Vertical.Bottom,
+            horizontal = Alignment.Horizontal.StartOver
         ),
         VerticalOver(
-            vertical = VerticalAlignment.BottomOver,
-            horizontal = HorizontalAlignment.Start
+            vertical = Alignment.Vertical.BottomOver,
+            horizontal = Alignment.Horizontal.Start
         ),
         VerticalOver(
-            vertical = VerticalAlignment.BottomOver,
-            horizontal = HorizontalAlignment.Center
+            vertical = Alignment.Vertical.BottomOver,
+            horizontal = Alignment.Horizontal.Center
         ),
         VerticalOver(
-            vertical = VerticalAlignment.BottomOver,
-            horizontal = HorizontalAlignment.End
+            vertical = Alignment.Vertical.BottomOver,
+            horizontal = Alignment.Horizontal.End
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Top,
-            horizontal = HorizontalAlignment.EndOver
+            vertical = Alignment.Vertical.Top,
+            horizontal = Alignment.Horizontal.EndOver
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Center,
-            horizontal = HorizontalAlignment.EndOver
+            vertical = Alignment.Vertical.Center,
+            horizontal = Alignment.Horizontal.EndOver
         ),
         HorizontalOver(
-            vertical = VerticalAlignment.Bottom,
-            horizontal = HorizontalAlignment.EndOver
+            vertical = Alignment.Vertical.Bottom,
+            horizontal = Alignment.Horizontal.EndOver
         )
     )
 }
