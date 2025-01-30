@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.toSize
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
-import com.cybozu.android.callout.compose.core.data.AlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
 import com.cybozu.android.callout.compose.core.graphic.CalloutShape
 
 internal fun Modifier.calloutShape(
     anchorSize: Size,
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     borderWidth: Dp,
     borderColor: Color,
     backgroundColor: Color,
@@ -52,10 +52,10 @@ internal fun Modifier.calloutShape(
     )
 
 internal fun Modifier.anchoredTooltip(
-    calloutState: CalloutState,
+    state: CalloutState,
 ): Modifier = this.onGloballyPositioned { coordinates ->
-    val stateImpl = when (calloutState) {
-        is CalloutStateImpl -> calloutState
+    val stateImpl = when (state) {
+        is CalloutStateImpl -> state
     }
 
     stateImpl.parentSize = coordinates.parentCoordinates?.size?.toSize()

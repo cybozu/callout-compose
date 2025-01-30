@@ -17,14 +17,14 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.cybozu.android.callout.compose.core.data.AlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
 import com.cybozu.android.callout.compose.core.modifier.calloutShape
 import com.cybozu.android.callout.compose.core.preview.AlignmentPreviewParameterProvider
 
-internal fun CalloutShape(
-    anchorSize: Size,
-    alignment: AlignmentContext,
-): Shape = object : Shape {
+internal data class CalloutShape(
+    private val anchorSize: Size,
+    private val alignment: CalloutAlignmentContext,
+) : Shape {
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density) =
         buildOutline(
             alignment = alignment,
@@ -37,7 +37,7 @@ internal fun CalloutShape(
 }
 
 private fun buildOutline(
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     anchorSize: Size,
     selfSize: Size,
     density: Density,
@@ -55,7 +55,7 @@ private fun buildOutline(
 @Preview
 @Composable
 private fun CalloutShapePreview(
-    @PreviewParameter(AlignmentPreviewParameterProvider::class) alignment: AlignmentContext,
+    @PreviewParameter(AlignmentPreviewParameterProvider::class) alignment: CalloutAlignmentContext,
 ) {
     val density = LocalDensity.current
     Box(

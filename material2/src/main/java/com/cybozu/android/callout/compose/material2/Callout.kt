@@ -4,14 +4,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.cybozu.android.callout.compose.core.BasicCallout
 import com.cybozu.android.callout.compose.core.CalloutState
-import com.cybozu.android.callout.compose.core.data.Alignment
+import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
 
 @Composable
 public fun Callout(
     calloutState: CalloutState,
-    verticalAlignment: Alignment.Vertical.Over = Alignment.Vertical.Bottom.over(),
-    horizontalAlignment: Alignment.Horizontal.Inner = Alignment.Horizontal.Start,
+    verticalAlignment: CalloutAlignment.Vertical.Over = CalloutAlignment.Vertical.Bottom.over(),
+    horizontalAlignment: CalloutAlignment.Horizontal.Inner = CalloutAlignment.Horizontal.Start,
     calloutProperties: CalloutProperties = CalloutProperties(
         borderColor = MaterialTheme.colors.onSurface,
         contentColor = MaterialTheme.colors.onSurface,
@@ -34,8 +34,8 @@ public fun Callout(
 @Composable
 public fun Callout(
     calloutState: CalloutState,
-    verticalAlignment: Alignment.Vertical.Inner = Alignment.Vertical.Top,
-    horizontalAlignment: Alignment.Horizontal.Over = Alignment.Horizontal.End.over(),
+    verticalAlignment: CalloutAlignment.Vertical.Inner = CalloutAlignment.Vertical.Top,
+    horizontalAlignment: CalloutAlignment.Horizontal.Over = CalloutAlignment.Horizontal.End.over(),
     calloutProperties: CalloutProperties = CalloutProperties(
         borderColor = MaterialTheme.colors.onSurface,
         contentColor = MaterialTheme.colors.onSurface,

@@ -1,7 +1,7 @@
 package com.cybozu.android.callout.compose.core.data
 
-public sealed interface Alignment {
-    public sealed class Vertical : Alignment {
+public sealed interface CalloutAlignment {
+    public sealed class Vertical : CalloutAlignment {
         public sealed class Inner : Vertical()
         public sealed class Over : Vertical()
 
@@ -18,7 +18,7 @@ public sealed interface Alignment {
         internal data object BottomOver : Over()
     }
 
-    public sealed class Horizontal : Alignment {
+    public sealed class Horizontal : CalloutAlignment {
         public sealed class Inner : Horizontal()
         public sealed class Over : Horizontal()
 
@@ -36,33 +36,33 @@ public sealed interface Alignment {
     }
 }
 
-internal sealed interface AlignmentContext {
-    val vertical: Alignment.Vertical
-    val horizontal: Alignment.Horizontal
+internal sealed interface CalloutAlignmentContext {
+    val vertical: CalloutAlignment.Vertical
+    val horizontal: CalloutAlignment.Horizontal
 
     data class VerticalOver(
-        override val vertical: Alignment.Vertical.Over,
-        override val horizontal: Alignment.Horizontal.Inner,
-    ) : AlignmentContext
+        override val vertical: CalloutAlignment.Vertical.Over,
+        override val horizontal: CalloutAlignment.Horizontal.Inner,
+    ) : CalloutAlignmentContext
 
     data class HorizontalOver(
-        override val vertical: Alignment.Vertical.Inner,
-        override val horizontal: Alignment.Horizontal.Over,
-    ) : AlignmentContext
+        override val vertical: CalloutAlignment.Vertical.Inner,
+        override val horizontal: CalloutAlignment.Horizontal.Over,
+    ) : CalloutAlignmentContext
 }
 
-internal fun AlignmentContext(
-    vertical: Alignment.Vertical.Over,
-    horizontal: Alignment.Horizontal.Inner,
-): AlignmentContext = AlignmentContext.VerticalOver(
+internal fun CalloutAlignmentContext(
+    vertical: CalloutAlignment.Vertical.Over,
+    horizontal: CalloutAlignment.Horizontal.Inner,
+): CalloutAlignmentContext = CalloutAlignmentContext.VerticalOver(
     vertical = vertical,
     horizontal = horizontal
 )
 
-internal fun AlignmentContext(
-    vertical: Alignment.Vertical.Inner,
-    horizontal: Alignment.Horizontal.Over,
-): AlignmentContext = AlignmentContext.HorizontalOver(
+internal fun CalloutAlignmentContext(
+    vertical: CalloutAlignment.Vertical.Inner,
+    horizontal: CalloutAlignment.Horizontal.Over,
+): CalloutAlignmentContext = CalloutAlignmentContext.HorizontalOver(
     vertical = vertical,
     horizontal = horizontal
 )

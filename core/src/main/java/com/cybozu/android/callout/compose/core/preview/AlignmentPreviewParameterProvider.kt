@@ -1,60 +1,60 @@
 package com.cybozu.android.callout.compose.core.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.cybozu.android.callout.compose.core.data.Alignment
-import com.cybozu.android.callout.compose.core.data.AlignmentContext
-import com.cybozu.android.callout.compose.core.data.AlignmentContext.HorizontalOver
-import com.cybozu.android.callout.compose.core.data.AlignmentContext.VerticalOver
+import com.cybozu.android.callout.compose.core.data.CalloutAlignment
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext.HorizontalOver
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext.VerticalOver
 
-internal class AlignmentPreviewParameterProvider : PreviewParameterProvider<AlignmentContext> {
-    override val values: Sequence<AlignmentContext> = sequenceOf(
+internal class AlignmentPreviewParameterProvider : PreviewParameterProvider<CalloutAlignmentContext> {
+    override val values: Sequence<CalloutAlignmentContext> = sequenceOf(
         VerticalOver(
-            vertical = Alignment.Vertical.TopOver,
-            horizontal = Alignment.Horizontal.Start
-        ),
-        VerticalOver(
-            vertical = Alignment.Vertical.TopOver,
-            horizontal = Alignment.Horizontal.Center
+            vertical = CalloutAlignment.Vertical.TopOver,
+            horizontal = CalloutAlignment.Horizontal.Start
         ),
         VerticalOver(
-            vertical = Alignment.Vertical.TopOver,
-            horizontal = Alignment.Horizontal.End
-        ),
-        HorizontalOver(
-            vertical = Alignment.Vertical.Top,
-            horizontal = Alignment.Horizontal.StartOver
-        ),
-        HorizontalOver(
-            vertical = Alignment.Vertical.Center,
-            horizontal = Alignment.Horizontal.StartOver
-        ),
-        HorizontalOver(
-            vertical = Alignment.Vertical.Bottom,
-            horizontal = Alignment.Horizontal.StartOver
+            vertical = CalloutAlignment.Vertical.TopOver,
+            horizontal = CalloutAlignment.Horizontal.Center
         ),
         VerticalOver(
-            vertical = Alignment.Vertical.BottomOver,
-            horizontal = Alignment.Horizontal.Start
+            vertical = CalloutAlignment.Vertical.TopOver,
+            horizontal = CalloutAlignment.Horizontal.End
+        ),
+        HorizontalOver(
+            vertical = CalloutAlignment.Vertical.Top,
+            horizontal = CalloutAlignment.Horizontal.StartOver
+        ),
+        HorizontalOver(
+            vertical = CalloutAlignment.Vertical.Center,
+            horizontal = CalloutAlignment.Horizontal.StartOver
+        ),
+        HorizontalOver(
+            vertical = CalloutAlignment.Vertical.Bottom,
+            horizontal = CalloutAlignment.Horizontal.StartOver
         ),
         VerticalOver(
-            vertical = Alignment.Vertical.BottomOver,
-            horizontal = Alignment.Horizontal.Center
+            vertical = CalloutAlignment.Vertical.BottomOver,
+            horizontal = CalloutAlignment.Horizontal.Start
         ),
         VerticalOver(
-            vertical = Alignment.Vertical.BottomOver,
-            horizontal = Alignment.Horizontal.End
+            vertical = CalloutAlignment.Vertical.BottomOver,
+            horizontal = CalloutAlignment.Horizontal.Center
+        ),
+        VerticalOver(
+            vertical = CalloutAlignment.Vertical.BottomOver,
+            horizontal = CalloutAlignment.Horizontal.End
         ),
         HorizontalOver(
-            vertical = Alignment.Vertical.Top,
-            horizontal = Alignment.Horizontal.EndOver
+            vertical = CalloutAlignment.Vertical.Top,
+            horizontal = CalloutAlignment.Horizontal.EndOver
         ),
         HorizontalOver(
-            vertical = Alignment.Vertical.Center,
-            horizontal = Alignment.Horizontal.EndOver
+            vertical = CalloutAlignment.Vertical.Center,
+            horizontal = CalloutAlignment.Horizontal.EndOver
         ),
         HorizontalOver(
-            vertical = Alignment.Vertical.Bottom,
-            horizontal = Alignment.Horizontal.EndOver
+            vertical = CalloutAlignment.Vertical.Bottom,
+            horizontal = CalloutAlignment.Horizontal.EndOver
         )
     )
 }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
@@ -21,7 +20,7 @@ import androidx.compose.ui.window.Popup
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.LocalContentColorProvider
-import com.cybozu.android.callout.compose.core.data.AlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraints
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraintsCalculator
@@ -29,38 +28,13 @@ import com.cybozu.android.callout.compose.core.graphic.PopupLayoutCalculator
 import com.cybozu.android.callout.compose.core.graphic.PopupLayoutContext
 import com.cybozu.android.callout.compose.core.modifier.calloutShape
 
-internal sealed interface PopupScope {
-    val alignment: Alignment
-    val offsetFromBaseline: Offset
-    val isBackgroundTapDisabled: Boolean
-    fun dismissRequest()
-}
-
-internal data class PopupScopeImpl(
-    override val isBackgroundTapDisabled: Boolean,
-    private val popupLayoutContext: PopupLayoutContext,
-    private val state: CalloutState,
-    private val onDismissRequest: (() -> Unit)?,
-) : PopupScope {
-    override val alignment: Alignment
-        get() = popupLayoutContext.alignment
-    override val offsetFromBaseline: Offset
-        get() = popupLayoutContext.offsetFromBaseline
-
-    override fun dismissRequest() {
-        state.hide()
-        onDismissRequest?.let { it() }
-    }
-}
-
 @Composable
 internal fun CalloutFrame(
     contentColorProvider: LocalContentColorProvider,
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
-    alignmentContext: AlignmentContext,
+    alignmentContext: CalloutAlignmentContext,
     onDismissRequest: (() -> Unit)?,
-    popUp: @Composable PopupScope.(@Composable () -> Unit) -> Unit = { DefaultPopUp(it) },
     content: @Composable () -> Unit,
 ) {
     val stateImpl = when (calloutState) {
@@ -85,27 +59,26 @@ internal fun CalloutFrame(
             parentSize = stateImpl.parentSize ?: Size.Zero,
             anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero
         )
-        val popupScope = rememberCalloutFrameScope(
-            isBackgroundTapDisabled = calloutProperties.isFocusable,
-            popupLayoutContext = popupLayoutContext,
-            state = calloutState,
-            onDismissRequest = onDismissRequest
-        )
-        with(popupScope) {
-            popUp {
-                contentColorProvider.Provide(
-                    contentColor = calloutProperties.color.contentColor
-                ) {
-                    CalloutFrameImpl(
-                        modifier = Modifier.alpha(alpha),
-                        density = density,
-                        anchorSize = stateImpl.anchorRectInParent?.size ?: Size.Zero,
-                        calloutProperties = calloutProperties,
-                        calloutLayoutConstraints = calloutLayoutConstraints,
-                        alignmentContext = alignmentContext,
-                        content = content
-                    )
-                }
+        Popup(
+            alignment = popupLayoutContext.alignment,
+            offset = popupLayoutContext.offsetFromBaseline.toIntOffset(),
+            onDismissRequest = {
+                stateImpl.hide()
+                onDismissRequest?.let { it() }
+            }
+        ) {
+            contentColorProvider.Provide(
+                contentColor = calloutProperties.color.contentColor
+            ) {
+                CalloutFrameImpl(
+                    modifier = Modifier.alpha(alpha),
+                    density = density,
+                    anchorSize = stateImpl.anchorRectInParent?.size ?: Size.Zero,
+                    calloutProperties = calloutProperties,
+                    calloutLayoutConstraints = calloutLayoutConstraints,
+                    alignmentContext = alignmentContext,
+                    content = content
+                )
             }
         }
     }
@@ -114,26 +87,13 @@ internal fun CalloutFrame(
 private fun Offset.toIntOffset(): IntOffset = IntOffset(x.toInt(), y.toInt())
 
 @Composable
-private fun PopupScope.DefaultPopUp(content: @Composable () -> Unit) {
-    Popup(
-        alignment = alignment,
-        offset = offsetFromBaseline.toIntOffset(),
-        onDismissRequest = {
-            dismissRequest()
-        }
-    ) {
-        content()
-    }
-}
-
-@Composable
 private fun CalloutFrameImpl(
     modifier: Modifier = Modifier,
     density: Density,
     anchorSize: Size,
     calloutProperties: CalloutProperties,
     calloutLayoutConstraints: CalloutLayoutConstraints,
-    alignmentContext: AlignmentContext,
+    alignmentContext: CalloutAlignmentContext,
     content: @Composable () -> Unit,
 ) {
     Box(
@@ -161,25 +121,10 @@ private fun CalloutFrameImpl(
 }
 
 @Composable
-private fun rememberCalloutFrameScope(
-    isBackgroundTapDisabled: Boolean,
-    popupLayoutContext: PopupLayoutContext,
-    state: CalloutState,
-    onDismissRequest: (() -> Unit)?,
-): PopupScope = remember(state, onDismissRequest) {
-    PopupScopeImpl(
-        isBackgroundTapDisabled = isBackgroundTapDisabled,
-        popupLayoutContext = popupLayoutContext,
-        state = state,
-        onDismissRequest = onDismissRequest
-    )
-}
-
-@Composable
 private fun rememberPopupLayoutContext(
     parentSize: Size,
     anchorRectInParent: Rect,
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
 ): PopupLayoutContext = remember(parentSize, anchorRectInParent, alignment) {
     PopupLayoutCalculator.calculate(
         parentSize = parentSize,
@@ -191,7 +136,7 @@ private fun rememberPopupLayoutContext(
 @Composable
 private fun rememberCalloutLayoutConstraints(
     density: Density,
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     parentSize: Size,
     anchorRectInParent: Rect,
 ): CalloutLayoutConstraints = remember(density, parentSize, anchorRectInParent, alignment) {

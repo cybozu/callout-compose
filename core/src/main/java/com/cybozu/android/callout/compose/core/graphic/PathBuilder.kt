@@ -8,12 +8,12 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import com.cybozu.android.callout.compose.core.data.Alignment
-import com.cybozu.android.callout.compose.core.data.AlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutAlignment
+import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
 import com.cybozu.android.callout.compose.core.data.dpu
 
 internal fun buildCalloutPath(
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     anchorSize: Size,
     selfSize: Size,
     density: Density,
@@ -29,7 +29,7 @@ internal fun buildCalloutPath(
 )
 
 private fun buildBoxPath(
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     selfSize: Size,
     density: Density,
 ): Path = buildPath(
@@ -46,7 +46,7 @@ private fun buildBoxPath(
 }
 
 private fun buildPointerPath(
-    alignment: AlignmentContext,
+    alignment: CalloutAlignmentContext,
     anchorSize: Size,
     selfSize: Size,
     density: Density,
@@ -56,16 +56,16 @@ private fun buildPointerPath(
     density = density
 ) {
     when (alignment) {
-        is AlignmentContext.HorizontalOver -> {
+        is CalloutAlignmentContext.HorizontalOver -> {
             when (alignment.horizontal) {
-                Alignment.Horizontal.EndOver -> {
+                CalloutAlignment.Horizontal.EndOver -> {
                     startPointerPath(
                         anchorSize = anchorSize,
                         verticalAlignment = alignment.vertical
                     )
                 }
 
-                Alignment.Horizontal.StartOver -> {
+                CalloutAlignment.Horizontal.StartOver -> {
                     endPointerPath(
                         anchorSize = anchorSize,
                         verticalAlignment = alignment.vertical
@@ -74,16 +74,16 @@ private fun buildPointerPath(
             }
         }
 
-        is AlignmentContext.VerticalOver -> {
+        is CalloutAlignmentContext.VerticalOver -> {
             when (alignment.vertical) {
-                Alignment.Vertical.TopOver -> {
+                CalloutAlignment.Vertical.TopOver -> {
                     bottomPointerPath(
                         anchorSize = anchorSize,
                         horizontalAlignment = alignment.horizontal
                     )
                 }
 
-                Alignment.Vertical.BottomOver -> {
+                CalloutAlignment.Vertical.BottomOver -> {
                     topPointerPath(
                         anchorSize = anchorSize,
                         horizontalAlignment = alignment.horizontal
@@ -96,31 +96,31 @@ private fun buildPointerPath(
 
 private fun PathScope.topPointerPath(
     anchorSize: Size,
-    horizontalAlignment: Alignment.Horizontal.Inner,
+    horizontalAlignment: CalloutAlignment.Horizontal.Inner,
 ) {
     when (horizontalAlignment) {
-        Alignment.Horizontal.Start -> {
+        CalloutAlignment.Horizontal.Start -> {
             moveTo(shiftedPoint(2.dpu.toPx(), 0f))
         }
 
-        Alignment.Horizontal.Center -> {
+        CalloutAlignment.Horizontal.Center -> {
             moveTo(shiftedPoint(size.width / 2f - 0.5.dpu.toPx(), 0f))
         }
 
-        Alignment.Horizontal.End -> {
+        CalloutAlignment.Horizontal.End -> {
             moveTo(shiftedPoint(size.width - 3.dpu.toPx(), 0f))
         }
     }
     val offset = when (horizontalAlignment) {
-        Alignment.Horizontal.Start -> {
+        CalloutAlignment.Horizontal.Start -> {
             (2.5.dpu.toPx() - (anchorSize.width / 2f)).coerceAtLeast(0f)
         }
 
-        Alignment.Horizontal.Center -> {
+        CalloutAlignment.Horizontal.Center -> {
             0f
         }
 
-        Alignment.Horizontal.End -> {
+        CalloutAlignment.Horizontal.End -> {
             -(2.5.dpu.toPx() - (anchorSize.width / 2f)).coerceAtLeast(0f)
         }
     }
@@ -131,31 +131,31 @@ private fun PathScope.topPointerPath(
 
 private fun PathScope.bottomPointerPath(
     anchorSize: Size,
-    horizontalAlignment: Alignment.Horizontal.Inner,
+    horizontalAlignment: CalloutAlignment.Horizontal.Inner,
 ) {
     when (horizontalAlignment) {
-        Alignment.Horizontal.Start -> {
+        CalloutAlignment.Horizontal.Start -> {
             moveTo(shiftedPoint(2.dpu.toPx(), size.height))
         }
 
-        Alignment.Horizontal.Center -> {
+        CalloutAlignment.Horizontal.Center -> {
             moveTo(shiftedPoint(size.width / 2f - 0.5.dpu.toPx(), size.height))
         }
 
-        Alignment.Horizontal.End -> {
+        CalloutAlignment.Horizontal.End -> {
             moveTo(shiftedPoint(size.width - 3.dpu.toPx(), size.height))
         }
     }
     val offset = when (horizontalAlignment) {
-        Alignment.Horizontal.Start -> {
+        CalloutAlignment.Horizontal.Start -> {
             (2.5.dpu.toPx() - (anchorSize.width / 2f)).coerceAtLeast(0f)
         }
 
-        Alignment.Horizontal.Center -> {
+        CalloutAlignment.Horizontal.Center -> {
             0f
         }
 
-        Alignment.Horizontal.End -> {
+        CalloutAlignment.Horizontal.End -> {
             -(2.5.dpu.toPx() - (anchorSize.width / 2f)).coerceAtLeast(0f)
         }
     }
@@ -166,31 +166,31 @@ private fun PathScope.bottomPointerPath(
 
 private fun PathScope.startPointerPath(
     anchorSize: Size,
-    verticalAlignment: Alignment.Vertical.Inner,
+    verticalAlignment: CalloutAlignment.Vertical.Inner,
 ) {
     when (verticalAlignment) {
-        Alignment.Vertical.Top -> {
+        CalloutAlignment.Vertical.Top -> {
             moveTo(shiftedPoint(0f, 2.dpu.toPx()))
         }
 
-        Alignment.Vertical.Center -> {
+        CalloutAlignment.Vertical.Center -> {
             moveTo(shiftedPoint(0f, size.height / 2f - 0.5.dpu.toPx()))
         }
 
-        Alignment.Vertical.Bottom -> {
+        CalloutAlignment.Vertical.Bottom -> {
             moveTo(shiftedPoint(0f, size.height - 3.dpu.toPx()))
         }
     }
     val offset = when (verticalAlignment) {
-        Alignment.Vertical.Top -> {
+        CalloutAlignment.Vertical.Top -> {
             (2.5.dpu.toPx() - (anchorSize.height / 2f)).coerceAtLeast(0f)
         }
 
-        Alignment.Vertical.Center -> {
+        CalloutAlignment.Vertical.Center -> {
             0f
         }
 
-        Alignment.Vertical.Bottom -> {
+        CalloutAlignment.Vertical.Bottom -> {
             -(2.5.dpu.toPx() - (anchorSize.height / 2f)).coerceAtLeast(0f)
         }
     }
@@ -201,31 +201,31 @@ private fun PathScope.startPointerPath(
 
 private fun PathScope.endPointerPath(
     anchorSize: Size,
-    verticalAlignment: Alignment.Vertical.Inner,
+    verticalAlignment: CalloutAlignment.Vertical.Inner,
 ) {
     when (verticalAlignment) {
-        Alignment.Vertical.Top -> {
+        CalloutAlignment.Vertical.Top -> {
             moveTo(shiftedPoint(size.width, 2.dpu.toPx()))
         }
 
-        Alignment.Vertical.Center -> {
+        CalloutAlignment.Vertical.Center -> {
             moveTo(shiftedPoint(size.width, size.height / 2f - 0.5.dpu.toPx()))
         }
 
-        Alignment.Vertical.Bottom -> {
+        CalloutAlignment.Vertical.Bottom -> {
             moveTo(shiftedPoint(size.width, size.height - 3.dpu.toPx()))
         }
     }
     val offset = when (verticalAlignment) {
-        Alignment.Vertical.Top -> {
+        CalloutAlignment.Vertical.Top -> {
             (2.5.dpu.toPx() - (anchorSize.height / 2f)).coerceAtLeast(0f)
         }
 
-        Alignment.Vertical.Center -> {
+        CalloutAlignment.Vertical.Center -> {
             0f
         }
 
-        Alignment.Vertical.Bottom -> {
+        CalloutAlignment.Vertical.Bottom -> {
             -(2.5.dpu.toPx() - (anchorSize.height / 2f)).coerceAtLeast(0f)
         }
     }
@@ -234,7 +234,7 @@ private fun PathScope.endPointerPath(
     relativeLineTo(point(0f, -1.dpu.toPx()))
 }
 
-private fun buildPath(alignment: AlignmentContext, size: Size, density: Density, builder: PathScope.() -> Unit = {}): Path = PathScope(
+private fun buildPath(alignment: CalloutAlignmentContext, size: Size, density: Density, builder: PathScope.() -> Unit = {}): Path = PathScope(
     alignment = alignment,
     size = size,
     density = density,
@@ -250,7 +250,7 @@ private data class Point(
 
 private data class PathScope(
     val size: Size,
-    private val alignment: AlignmentContext,
+    private val alignment: CalloutAlignmentContext,
     private val density: Density,
     private val inner: Path,
 ) {
@@ -263,26 +263,26 @@ private data class PathScope(
 
     fun shiftedPoint(x: Float, y: Float): Point {
         val newX = when (alignment) {
-            is AlignmentContext.HorizontalOver -> {
+            is CalloutAlignmentContext.HorizontalOver -> {
                 when {
-                    alignment.horizontal is Alignment.Horizontal.StartOver && x >= (size.width / 2f) -> x - 1.dpu.toPx()
-                    alignment.horizontal is Alignment.Horizontal.EndOver && x <= (size.width / 2f) -> x + 1.dpu.toPx()
+                    alignment.horizontal is CalloutAlignment.Horizontal.StartOver && x >= (size.width / 2f) -> x - 1.dpu.toPx()
+                    alignment.horizontal is CalloutAlignment.Horizontal.EndOver && x <= (size.width / 2f) -> x + 1.dpu.toPx()
                     else -> x
                 }
             }
 
-            is AlignmentContext.VerticalOver -> x
+            is CalloutAlignmentContext.VerticalOver -> x
         }
         val newY = when (alignment) {
-            is AlignmentContext.VerticalOver -> {
+            is CalloutAlignmentContext.VerticalOver -> {
                 when {
-                    alignment.vertical is Alignment.Vertical.TopOver && y >= (size.height / 2f) -> y - 1.dpu.toPx()
-                    alignment.vertical is Alignment.Vertical.BottomOver && y <= (size.height / 2f) -> y + 1.dpu.toPx()
+                    alignment.vertical is CalloutAlignment.Vertical.TopOver && y >= (size.height / 2f) -> y - 1.dpu.toPx()
+                    alignment.vertical is CalloutAlignment.Vertical.BottomOver && y <= (size.height / 2f) -> y + 1.dpu.toPx()
                     else -> y
                 }
             }
 
-            is AlignmentContext.HorizontalOver -> y
+            is CalloutAlignmentContext.HorizontalOver -> y
         }
         return Point(
             x = newX,
@@ -300,12 +300,12 @@ private data class PathScope(
 
     fun shiftedSize(width: Float, height: Float): Size = Size(
         width = when (alignment) {
-            is AlignmentContext.HorizontalOver -> width - 1.dpu.toPx()
-            is AlignmentContext.VerticalOver -> width
+            is CalloutAlignmentContext.HorizontalOver -> width - 1.dpu.toPx()
+            is CalloutAlignmentContext.VerticalOver -> width
         },
         height = when (alignment) {
-            is AlignmentContext.HorizontalOver -> height
-            is AlignmentContext.VerticalOver -> height - 1.dpu.toPx()
+            is CalloutAlignmentContext.HorizontalOver -> height
+            is CalloutAlignmentContext.VerticalOver -> height - 1.dpu.toPx()
         }
     )
 

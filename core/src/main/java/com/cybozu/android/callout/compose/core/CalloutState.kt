@@ -1,8 +1,10 @@
 package com.cybozu.android.callout.compose.core
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -34,4 +36,13 @@ internal class CalloutStateImpl(
     override fun hide() {
         isVisible = false
     }
+}
+
+@Composable
+public fun rememberCalloutState(
+    isVisible: Boolean = false,
+): CalloutState = remember {
+    CalloutStateImpl(
+        isVisible = isVisible
+    )
 }

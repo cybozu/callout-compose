@@ -8,7 +8,7 @@ public interface LocalContentColorProvider {
     public fun Provide(contentColor: Color, content: @Composable () -> Unit)
 }
 
-public class DefaultLocalContentColorProvider : LocalContentColorProvider {
+internal class DefaultLocalContentColorProvider : LocalContentColorProvider {
     @Composable
     override fun Provide(contentColor: Color, content: @Composable () -> Unit) {
         content()
