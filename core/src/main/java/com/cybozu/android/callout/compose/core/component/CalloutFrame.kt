@@ -2,9 +2,13 @@ package com.cybozu.android.callout.compose.core.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,12 +19,18 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
+import com.cybozu.android.callout.compose.core.DefaultLocalContentColorProvider
 import com.cybozu.android.callout.compose.core.LocalContentColorProvider
 import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
@@ -30,7 +40,10 @@ import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraints
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraintsCalculator
 import com.cybozu.android.callout.compose.core.graphic.PopupLayoutCalculator
 import com.cybozu.android.callout.compose.core.graphic.PopupLayoutContext
+import com.cybozu.android.callout.compose.core.modifier.anchoredCallout
 import com.cybozu.android.callout.compose.core.modifier.calloutShape
+import com.cybozu.android.callout.compose.core.preview.AlignmentPreviewParameterProvider
+import com.cybozu.android.callout.compose.core.rememberCalloutState
 
 @Composable
 internal fun CalloutFrame(
@@ -63,27 +76,54 @@ internal fun CalloutFrame(
             parentSize = stateImpl.parentSize ?: Size.Zero,
             anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero
         )
-        Popup(
-            alignment = popupLayoutContext.alignment,
-            offset = popupLayoutContext.offsetFromBaseline.toIntOffset(),
+        CalloutFrameImpl(
+            contentColorProvider = contentColorProvider,
+            calloutProperties = calloutProperties,
+            alpha = alpha,
+            density = density,
+            anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero,
+            alignmentContext = alignmentContext,
+            popupLayoutContext = popupLayoutContext,
+            calloutLayoutConstraints = calloutLayoutConstraints,
             onDismissRequest = {
-                stateImpl.hide()
+                calloutState.hide()
                 onDismissRequest?.let { it() }
-            }
+            },
+            content = content
+        )
+    }
+}
+
+@Composable
+private fun CalloutFrameImpl(
+    contentColorProvider: LocalContentColorProvider,
+    calloutProperties: CalloutProperties,
+    alpha: Float,
+    density: Density,
+    anchorRectInParent: Rect,
+    alignmentContext: CalloutAlignmentContext,
+    popupLayoutContext: PopupLayoutContext,
+    calloutLayoutConstraints: CalloutLayoutConstraints,
+    onDismissRequest: (() -> Unit)?,
+    content: @Composable () -> Unit,
+) {
+    Popup(
+        alignment = popupLayoutContext.alignment,
+        offset = popupLayoutContext.offsetFromBaseline.toIntOffset(),
+        onDismissRequest = onDismissRequest
+    ) {
+        contentColorProvider.Provide(
+            contentColor = calloutProperties.color.contentColor
         ) {
-            contentColorProvider.Provide(
-                contentColor = calloutProperties.color.contentColor
-            ) {
-                CalloutFrameImpl(
-                    modifier = Modifier.alpha(alpha),
-                    density = density,
-                    anchorSize = stateImpl.anchorRectInParent?.size ?: Size.Zero,
-                    calloutProperties = calloutProperties,
-                    calloutLayoutConstraints = calloutLayoutConstraints,
-                    alignmentContext = alignmentContext,
-                    content = content
-                )
-            }
+            Content(
+                modifier = Modifier.alpha(alpha),
+                density = density,
+                anchorSize = anchorRectInParent.size,
+                calloutProperties = calloutProperties,
+                calloutLayoutConstraints = calloutLayoutConstraints,
+                alignmentContext = alignmentContext,
+                content = content
+            )
         }
     }
 }
@@ -91,7 +131,7 @@ internal fun CalloutFrame(
 private fun Offset.toIntOffset(): IntOffset = IntOffset(x.toInt(), y.toInt())
 
 @Composable
-private fun CalloutFrameImpl(
+private fun Content(
     modifier: Modifier = Modifier,
     density: Density,
     anchorSize: Size,
@@ -173,4 +213,78 @@ private fun rememberCalloutLayoutConstraints(
         parentSize = parentSize,
         anchorRectInParent = anchorRectInParent
     )
+}
+
+@Preview
+@Composable
+private fun CalloutPreview(
+    @PreviewParameter(AlignmentPreviewParameterProvider::class) alignmentContext: CalloutAlignmentContext,
+) {
+    val density = LocalDensity.current
+
+    fun Dp.toPixel(): Float = with(density) {
+        toPx()
+    }
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        val state = rememberCalloutState(
+            isVisible = true
+        )
+        val anchorRectInParent = Rect(
+            left = 100.dp.toPixel(),
+            top = 100.dp.toPixel(),
+            right = 150.dp.toPixel(),
+            bottom = 150.dp.toPixel()
+        )
+        val popupLayoutContext = rememberPopupLayoutContext(
+            parentSize = Size(maxWidth.toPixel(), maxHeight.toPixel()),
+            anchorRectInParent = anchorRectInParent,
+            alignment = alignmentContext
+        )
+        val calloutLayoutConstraints = rememberCalloutLayoutConstraints(
+            density = density,
+            alignment = alignmentContext,
+            parentSize = Size(maxWidth.toPixel(), maxHeight.toPixel()),
+            anchorRectInParent = anchorRectInParent
+        )
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(
+                    start = 100.dp,
+                    top = 100.dp
+                )
+                .background(Color.Black)
+                .size(50.dp)
+                .anchoredCallout(
+                    state = state
+                )
+        )
+        CalloutFrameImpl(
+            contentColorProvider = DefaultLocalContentColorProvider(),
+            calloutProperties = CalloutProperties(
+                borderColor = Color.Black,
+                contentColor = Color.Black,
+                backgroundColor = Color.White,
+                elevation = 6.dp
+            ),
+            alpha = 1f,
+            density = density,
+            anchorRectInParent = anchorRectInParent,
+            alignmentContext = alignmentContext,
+            popupLayoutContext = popupLayoutContext,
+            calloutLayoutConstraints = calloutLayoutConstraints,
+            onDismissRequest = null
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .background(Color.Blue)
+            )
+        }
+    }
 }
