@@ -34,8 +34,8 @@ public fun Callout(
 @Composable
 public fun Callout(
     calloutState: CalloutState,
-    verticalAlignment: CalloutAlignment.Vertical.Inner = CalloutAlignment.Vertical.Top,
-    horizontalAlignment: CalloutAlignment.Horizontal.Over = CalloutAlignment.Horizontal.End.over(),
+    verticalAlignment: CalloutAlignment.Vertical.Inner,
+    horizontalAlignment: CalloutAlignment.Horizontal.Over,
     calloutProperties: CalloutProperties = CalloutProperties(
         borderColor = MaterialTheme.colorScheme.onSurface,
         contentColor = MaterialTheme.colorScheme.onSurface,

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -45,24 +46,72 @@ class MainActivity : ComponentActivity() {
 private fun CalloutScreen(modifier: Modifier = Modifier) {
     Surface(modifier = modifier) {
         Box(modifier = Modifier.fillMaxSize()) {
-            val calloutState = rememberCalloutState(
-                isVisible = true
+            AnchoredCallout(
+                anchorAlignment = Alignment.TopStart,
+                calloutVerticalAlignment = CalloutAlignment.Vertical.Top,
+                calloutHorizontalAlignment = CalloutAlignment.Horizontal.End.over()
             )
-            Anchor(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .anchoredCallout(
-                        state = calloutState
-                    )
+            AnchoredCallout(
+                anchorAlignment = Alignment.Center,
+                calloutVerticalAlignment = CalloutAlignment.Vertical.Bottom.over(),
+                calloutHorizontalAlignment = CalloutAlignment.Horizontal.End
             )
-            Callout(
-                calloutState = calloutState,
-                verticalAlignment = CalloutAlignment.Vertical.Top,
-                horizontalAlignment = CalloutAlignment.Horizontal.End.over()
-            ) {
-                Text(text = "Hello, Callout!")
-            }
+            AnchoredCallout(
+                anchorAlignment = Alignment.BottomEnd,
+                calloutVerticalAlignment = CalloutAlignment.Vertical.Top.over(),
+                calloutHorizontalAlignment = CalloutAlignment.Horizontal.End
+            )
         }
+    }
+}
+
+@Composable
+private fun BoxScope.AnchoredCallout(
+    anchorAlignment: Alignment,
+    calloutVerticalAlignment: CalloutAlignment.Vertical.Inner,
+    calloutHorizontalAlignment: CalloutAlignment.Horizontal.Over,
+) {
+    val calloutState = rememberCalloutState(
+        isVisible = true
+    )
+    Anchor(
+        modifier = Modifier
+            .align(anchorAlignment)
+            .anchoredCallout(
+                state = calloutState
+            )
+    )
+    Callout(
+        calloutState = calloutState,
+        verticalAlignment = calloutVerticalAlignment,
+        horizontalAlignment = calloutHorizontalAlignment
+    ) {
+        Text(text = "Hello, Callout!")
+    }
+}
+
+@Composable
+private fun BoxScope.AnchoredCallout(
+    anchorAlignment: Alignment,
+    calloutVerticalAlignment: CalloutAlignment.Vertical.Over,
+    calloutHorizontalAlignment: CalloutAlignment.Horizontal.Inner,
+) {
+    val calloutState = rememberCalloutState(
+        isVisible = true
+    )
+    Anchor(
+        modifier = Modifier
+            .align(anchorAlignment)
+            .anchoredCallout(
+                state = calloutState
+            )
+    )
+    Callout(
+        calloutState = calloutState,
+        verticalAlignment = calloutVerticalAlignment,
+        horizontalAlignment = calloutHorizontalAlignment
+    ) {
+        Text(text = "Hello, Callout!")
     }
 }
 
