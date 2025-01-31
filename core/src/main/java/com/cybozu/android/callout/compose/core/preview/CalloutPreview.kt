@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.cybozu.android.callout.compose.core.BasicCallout
 import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
-import com.cybozu.android.callout.compose.core.modifier.anchoredTooltip
+import com.cybozu.android.callout.compose.core.modifier.anchoredCallout
 import com.cybozu.android.callout.compose.core.rememberCalloutState
 
 @Preview
@@ -32,7 +32,7 @@ private fun CalloutPreview() {
                 .background(Color.Black)
                 .size(100.dp)
                 .align(Alignment.Center)
-                .anchoredTooltip(
+                .anchoredCallout(
                     state = state
                 )
         )
@@ -41,7 +41,8 @@ private fun CalloutPreview() {
             calloutProperties = CalloutProperties(
                 borderColor = Color.Black,
                 contentColor = Color.Black,
-                backgroundColor = Color.White
+                backgroundColor = Color.White,
+                elevation = 6.dp
             ),
             verticalAlignment = CalloutAlignment.Vertical.Bottom.over(),
             horizontalAlignment = CalloutAlignment.Horizontal.Start

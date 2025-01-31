@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    namespace = "com.cybozu.android.callout.compose.sampleapp"
+    namespace = "com.cybozu.android.callout.compose.sampleapp.material3"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.cybozu.android.callout.compose.sampleapp"
-        minSdk = 24
+        applicationId = "com.cybozu.android.callout.compose.sampleapp.material3"
+        minSdk = 27
         targetSdk = 35
         versionCode = 10000
         versionName = "1.0.0"
@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":material3"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

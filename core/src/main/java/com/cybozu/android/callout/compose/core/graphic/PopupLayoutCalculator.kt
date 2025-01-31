@@ -69,7 +69,23 @@ internal object PopupLayoutCalculator {
             CalloutAlignment.Vertical.TopOver -> parentSize.height - anchorRectInParent.top
             CalloutAlignment.Vertical.BottomOver -> anchorRectInParent.bottom
         }
+        val xBias = alignment.horizontal.bias
+        val yBias = alignment.vertical.bias
 
-        return Offset(x, y)
+        return Offset(x * xBias, y * yBias)
     }
+
+    private val CalloutAlignment.Vertical.bias: Float
+        get() = when (this) {
+            CalloutAlignment.Vertical.Top, CalloutAlignment.Vertical.BottomOver -> 1f // From Top
+            CalloutAlignment.Vertical.Center -> 1f // From Center
+            CalloutAlignment.Vertical.Bottom, CalloutAlignment.Vertical.TopOver -> -1f // From Bottom
+        }
+
+    private val CalloutAlignment.Horizontal.bias: Float
+        get() = when (this) {
+            CalloutAlignment.Horizontal.Start, CalloutAlignment.Horizontal.EndOver -> 1f // From Start
+            CalloutAlignment.Horizontal.Center -> 1f // From Center
+            CalloutAlignment.Horizontal.End, CalloutAlignment.Horizontal.StartOver -> -1f // From End
+        }
 }

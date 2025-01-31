@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "callout-compose"
-include(":sample-app")
+include(":sample-app-material3")
 include(":core")
 include(":material2")
 include(":material3")

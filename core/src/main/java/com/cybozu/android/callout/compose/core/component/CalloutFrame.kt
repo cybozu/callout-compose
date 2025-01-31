@@ -4,10 +4,12 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
@@ -20,8 +22,10 @@ import androidx.compose.ui.window.Popup
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.LocalContentColorProvider
+import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
+import com.cybozu.android.callout.compose.core.data.dpu
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraints
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraintsCalculator
 import com.cybozu.android.callout.compose.core.graphic.PopupLayoutCalculator
@@ -97,7 +101,16 @@ private fun CalloutFrameImpl(
     content: @Composable () -> Unit,
 ) {
     Box(
-        modifier
+        contentAlignment = Alignment.CenterStart,
+        modifier = modifier
+            .widthIn(
+                min = with(density) { calloutLayoutConstraints.minWidth.toDp() },
+                max = with(density) { calloutLayoutConstraints.maxWidth.toDp() }
+            )
+            .heightIn(
+                min = with(density) { calloutLayoutConstraints.minHeight.toDp() },
+                max = with(density) { calloutLayoutConstraints.maxHeight.toDp() }
+            )
             .calloutShape(
                 anchorSize = anchorSize,
                 alignment = alignmentContext,
@@ -107,13 +120,27 @@ private fun CalloutFrameImpl(
                 shadowColor = calloutProperties.color.shadowColor,
                 elevation = calloutProperties.elevation
             )
-            .widthIn(
-                min = with(density) { calloutLayoutConstraints.minWidth.toDp() },
-                max = with(density) { calloutLayoutConstraints.maxWidth.toDp() }
-            )
-            .heightIn(
-                min = with(density) { calloutLayoutConstraints.minHeight.toDp() },
-                max = with(density) { calloutLayoutConstraints.maxHeight.toDp() }
+            .padding(
+                top = if (alignmentContext.vertical is CalloutAlignment.Vertical.BottomOver) {
+                    2.dpu
+                } else {
+                    1.dpu
+                },
+                start = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.EndOver) {
+                    2.dpu
+                } else {
+                    1.dpu
+                },
+                bottom = if (alignmentContext.vertical is CalloutAlignment.Vertical.TopOver) {
+                    2.dpu
+                } else {
+                    1.dpu
+                },
+                end = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.StartOver) {
+                    2.dpu
+                } else {
+                    1.dpu
+                }
             )
     ) {
         content()

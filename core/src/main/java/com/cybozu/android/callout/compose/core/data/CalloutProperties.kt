@@ -19,8 +19,8 @@ public data class CalloutProperties(
         borderColor = borderColor,
         contentColor = contentColor,
         backgroundColor = backgroundColor,
-        shadowColor = Color.Unspecified,
-        elevation = 1.dp
+        shadowColor = backgroundColor,
+        elevation = 6.dp
     )
 
     public constructor(
@@ -32,7 +32,7 @@ public data class CalloutProperties(
         borderColor = borderColor,
         contentColor = contentColor,
         backgroundColor = backgroundColor,
-        shadowColor = Color.Unspecified,
+        shadowColor = backgroundColor,
         elevation = elevation
     )
 

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.callout.compose.android.library)
     alias(libs.plugins.callout.compose.jetpack.compose.core)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {

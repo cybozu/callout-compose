@@ -51,7 +51,7 @@ internal fun Modifier.calloutShape(
         )
     )
 
-internal fun Modifier.anchoredTooltip(
+public fun Modifier.anchoredCallout(
     state: CalloutState,
 ): Modifier = this.onGloballyPositioned { coordinates ->
     val stateImpl = when (state) {

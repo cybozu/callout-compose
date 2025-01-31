@@ -1,4 +1,4 @@
-package com.cybozu.android.callout.compose.sampleapp.ui.theme
+package com.cybozu.android.callout.compose.sampleapp.material3.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
