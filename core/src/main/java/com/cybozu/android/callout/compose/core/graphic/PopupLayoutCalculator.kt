@@ -7,11 +7,7 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
-
-internal data class PopupLayoutContext(
-    val alignment: Alignment,
-    val offsetFromBaseline: Offset,
-)
+import com.cybozu.android.callout.compose.core.data.PopupLayoutContext
 
 internal object PopupLayoutCalculator {
     fun calculate(

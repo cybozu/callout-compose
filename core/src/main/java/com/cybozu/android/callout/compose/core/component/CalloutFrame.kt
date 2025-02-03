@@ -35,12 +35,12 @@ import com.cybozu.android.callout.compose.core.DefaultLocalContentColorProvider
 import com.cybozu.android.callout.compose.core.LocalContentColorProvider
 import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
+import com.cybozu.android.callout.compose.core.data.CalloutLayoutConstraints
 import com.cybozu.android.callout.compose.core.data.CalloutProperties
-import com.cybozu.android.callout.compose.core.data.dpu
-import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraints
+import com.cybozu.android.callout.compose.core.data.PopupLayoutContext
+import com.cybozu.android.callout.compose.core.data.ccu
 import com.cybozu.android.callout.compose.core.graphic.CalloutLayoutConstraintsCalculator
 import com.cybozu.android.callout.compose.core.graphic.PopupLayoutCalculator
-import com.cybozu.android.callout.compose.core.graphic.PopupLayoutContext
 import com.cybozu.android.callout.compose.core.modifier.anchoredCallout
 import com.cybozu.android.callout.compose.core.modifier.calloutShape
 import com.cybozu.android.callout.compose.core.preview.AlignmentPreviewParameterProvider
@@ -166,24 +166,24 @@ private fun Content(
             )
             .padding(
                 top = if (alignmentContext.vertical is CalloutAlignment.Vertical.BottomOver) {
-                    2.dpu
+                    2.ccu
                 } else {
-                    1.dpu
+                    1.ccu
                 },
                 start = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.EndOver) {
-                    2.dpu
+                    2.ccu
                 } else {
-                    1.dpu
+                    1.ccu
                 },
                 bottom = if (alignmentContext.vertical is CalloutAlignment.Vertical.TopOver) {
-                    2.dpu
+                    2.ccu
                 } else {
-                    1.dpu
+                    1.ccu
                 },
                 end = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.StartOver) {
-                    2.dpu
+                    2.ccu
                 } else {
-                    1.dpu
+                    1.ccu
                 }
             )
     ) {

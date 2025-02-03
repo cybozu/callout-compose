@@ -3,13 +3,15 @@ package com.cybozu.android.callout.compose.core.data
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+// Callout Compose Unit
+
 private val base = 12.dp
 
-internal val Int.dpu: Dp
+internal val Int.ccu: Dp
     get() = base * this
 
-internal val Float.dpu: Dp
+internal val Float.ccu: Dp
     get() = base * this
 
-internal val Double.dpu: Dp
+internal val Double.ccu: Dp
     get() = base * this.toFloat()

@@ -6,7 +6,8 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import com.cybozu.android.callout.compose.core.data.CalloutAlignment
 import com.cybozu.android.callout.compose.core.data.CalloutAlignmentContext
-import com.cybozu.android.callout.compose.core.data.dpu
+import com.cybozu.android.callout.compose.core.data.CalloutLayoutConstraints
+import com.cybozu.android.callout.compose.core.data.ccu
 import kotlin.math.abs
 
 internal object CalloutLayoutConstraintsCalculator {
@@ -18,13 +19,13 @@ internal object CalloutLayoutConstraintsCalculator {
     ): CalloutLayoutConstraints {
         val minWidth = when (alignment.vertical) {
             is CalloutAlignment.Vertical.Inner -> 0.dp
-            is CalloutAlignment.Vertical.Over -> 5.dpu
+            is CalloutAlignment.Vertical.Over -> 5.ccu
         }.let {
             with(density) { it.toPx() }
         }
         val minHeight = when (alignment.horizontal) {
             is CalloutAlignment.Horizontal.Inner -> 0.dp
-            is CalloutAlignment.Horizontal.Over -> 5.dpu
+            is CalloutAlignment.Horizontal.Over -> 5.ccu
         }.let {
             with(density) { it.toPx() }
         }
@@ -51,10 +52,3 @@ internal object CalloutLayoutConstraintsCalculator {
         )
     }
 }
-
-internal data class CalloutLayoutConstraints(
-    val minWidth: Float,
-    val minHeight: Float,
-    val maxWidth: Float,
-    val maxHeight: Float,
-)
