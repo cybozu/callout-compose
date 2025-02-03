@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.DefaultLocalContentColorProvider
@@ -110,7 +111,10 @@ private fun CalloutFrameImpl(
     Popup(
         alignment = popupLayoutContext.alignment,
         offset = popupLayoutContext.offsetFromBaseline.toIntOffset(),
-        onDismissRequest = onDismissRequest
+        onDismissRequest = onDismissRequest,
+        properties = PopupProperties(
+            focusable = calloutProperties.isFocusable
+        )
     ) {
         contentColorProvider.Provide(
             contentColor = calloutProperties.color.contentColor
