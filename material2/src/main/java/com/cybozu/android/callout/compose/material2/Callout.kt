@@ -10,7 +10,7 @@ import com.cybozu.android.callout.compose.core.data.CalloutProperties
 @Composable
 public fun Callout(
     calloutState: CalloutState,
-    verticalAlignment: CalloutAlignment.Vertical.Over = CalloutAlignment.Vertical.Bottom.over(),
+    verticalAlignment: CalloutAlignment.Vertical.Outer = CalloutAlignment.Vertical.Bottom.outer(),
     horizontalAlignment: CalloutAlignment.Horizontal.Inner = CalloutAlignment.Horizontal.Start,
     calloutProperties: CalloutProperties = CalloutProperties(
         borderColor = MaterialTheme.colors.onSurface,
@@ -35,7 +35,7 @@ public fun Callout(
 public fun Callout(
     calloutState: CalloutState,
     verticalAlignment: CalloutAlignment.Vertical.Inner,
-    horizontalAlignment: CalloutAlignment.Horizontal.Over,
+    horizontalAlignment: CalloutAlignment.Horizontal.Outer,
     calloutProperties: CalloutProperties = CalloutProperties(
         borderColor = MaterialTheme.colors.onSurface,
         contentColor = MaterialTheme.colors.onSurface,

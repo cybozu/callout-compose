@@ -56,16 +56,16 @@ private fun buildPointerPath(
     density = density
 ) {
     when (alignment) {
-        is CalloutAlignmentContext.HorizontalOver -> {
+        is CalloutAlignmentContext.HorizontalOuter -> {
             when (alignment.horizontal) {
-                CalloutAlignment.Horizontal.EndOver -> {
+                CalloutAlignment.Horizontal.EndOuter -> {
                     startPointerPath(
                         anchorSize = anchorSize,
                         verticalAlignment = alignment.vertical
                     )
                 }
 
-                CalloutAlignment.Horizontal.StartOver -> {
+                CalloutAlignment.Horizontal.StartOuter -> {
                     endPointerPath(
                         anchorSize = anchorSize,
                         verticalAlignment = alignment.vertical
@@ -74,16 +74,16 @@ private fun buildPointerPath(
             }
         }
 
-        is CalloutAlignmentContext.VerticalOver -> {
+        is CalloutAlignmentContext.VerticalOuter -> {
             when (alignment.vertical) {
-                CalloutAlignment.Vertical.TopOver -> {
+                CalloutAlignment.Vertical.TopOuter -> {
                     bottomPointerPath(
                         anchorSize = anchorSize,
                         horizontalAlignment = alignment.horizontal
                     )
                 }
 
-                CalloutAlignment.Vertical.BottomOver -> {
+                CalloutAlignment.Vertical.BottomOuter -> {
                     topPointerPath(
                         anchorSize = anchorSize,
                         horizontalAlignment = alignment.horizontal
@@ -263,26 +263,26 @@ private data class PathScope(
 
     fun shiftedPoint(x: Float, y: Float): Point {
         val newX = when (alignment) {
-            is CalloutAlignmentContext.HorizontalOver -> {
+            is CalloutAlignmentContext.HorizontalOuter -> {
                 when {
-                    alignment.horizontal is CalloutAlignment.Horizontal.StartOver && x >= (size.width / 2f) -> x - 1.ccu.toPx()
-                    alignment.horizontal is CalloutAlignment.Horizontal.EndOver && x <= (size.width / 2f) -> x + 1.ccu.toPx()
+                    alignment.horizontal is CalloutAlignment.Horizontal.StartOuter && x >= (size.width / 2f) -> x - 1.ccu.toPx()
+                    alignment.horizontal is CalloutAlignment.Horizontal.EndOuter && x <= (size.width / 2f) -> x + 1.ccu.toPx()
                     else -> x
                 }
             }
 
-            is CalloutAlignmentContext.VerticalOver -> x
+            is CalloutAlignmentContext.VerticalOuter -> x
         }
         val newY = when (alignment) {
-            is CalloutAlignmentContext.VerticalOver -> {
+            is CalloutAlignmentContext.VerticalOuter -> {
                 when {
-                    alignment.vertical is CalloutAlignment.Vertical.TopOver && y >= (size.height / 2f) -> y - 1.ccu.toPx()
-                    alignment.vertical is CalloutAlignment.Vertical.BottomOver && y <= (size.height / 2f) -> y + 1.ccu.toPx()
+                    alignment.vertical is CalloutAlignment.Vertical.TopOuter && y >= (size.height / 2f) -> y - 1.ccu.toPx()
+                    alignment.vertical is CalloutAlignment.Vertical.BottomOuter && y <= (size.height / 2f) -> y + 1.ccu.toPx()
                     else -> y
                 }
             }
 
-            is CalloutAlignmentContext.HorizontalOver -> y
+            is CalloutAlignmentContext.HorizontalOuter -> y
         }
         return Point(
             x = newX,
@@ -300,12 +300,12 @@ private data class PathScope(
 
     fun shiftedSize(width: Float, height: Float): Size = Size(
         width = when (alignment) {
-            is CalloutAlignmentContext.HorizontalOver -> width - 1.ccu.toPx()
-            is CalloutAlignmentContext.VerticalOver -> width
+            is CalloutAlignmentContext.HorizontalOuter -> width - 1.ccu.toPx()
+            is CalloutAlignmentContext.VerticalOuter -> width
         },
         height = when (alignment) {
-            is CalloutAlignmentContext.HorizontalOver -> height
-            is CalloutAlignmentContext.VerticalOver -> height - 1.ccu.toPx()
+            is CalloutAlignmentContext.HorizontalOuter -> height
+            is CalloutAlignmentContext.VerticalOuter -> height - 1.ccu.toPx()
         }
     )
 

@@ -60,16 +60,16 @@ private fun CalloutScreen(modifier: Modifier = Modifier) {
             AnchoredCallout(
                 anchorAlignment = Alignment.TopStart,
                 calloutVerticalAlignment = CalloutAlignment.Vertical.Top,
-                calloutHorizontalAlignment = CalloutAlignment.Horizontal.End.over()
+                calloutHorizontalAlignment = CalloutAlignment.Horizontal.End.outer()
             )
             AnchoredCallout(
                 anchorAlignment = Alignment.Center,
-                calloutVerticalAlignment = CalloutAlignment.Vertical.Bottom.over(),
+                calloutVerticalAlignment = CalloutAlignment.Vertical.Bottom.outer(),
                 calloutHorizontalAlignment = CalloutAlignment.Horizontal.End
             )
             AnchoredCallout(
                 anchorAlignment = Alignment.BottomEnd,
-                calloutVerticalAlignment = CalloutAlignment.Vertical.Top.over(),
+                calloutVerticalAlignment = CalloutAlignment.Vertical.Top.outer(),
                 calloutHorizontalAlignment = CalloutAlignment.Horizontal.End
             )
         }
@@ -80,7 +80,7 @@ private fun CalloutScreen(modifier: Modifier = Modifier) {
 private fun BoxScope.AnchoredCallout(
     anchorAlignment: Alignment,
     calloutVerticalAlignment: CalloutAlignment.Vertical.Inner,
-    calloutHorizontalAlignment: CalloutAlignment.Horizontal.Over,
+    calloutHorizontalAlignment: CalloutAlignment.Horizontal.Outer,
 ) {
     val calloutState = rememberCalloutState(
         isVisible = true
@@ -104,7 +104,7 @@ private fun BoxScope.AnchoredCallout(
 @Composable
 private fun BoxScope.AnchoredCallout(
     anchorAlignment: Alignment,
-    calloutVerticalAlignment: CalloutAlignment.Vertical.Over,
+    calloutVerticalAlignment: CalloutAlignment.Vertical.Outer,
     calloutHorizontalAlignment: CalloutAlignment.Horizontal.Inner,
 ) {
     val calloutState = rememberCalloutState(

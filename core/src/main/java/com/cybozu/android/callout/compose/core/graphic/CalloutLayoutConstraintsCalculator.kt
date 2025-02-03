@@ -19,13 +19,13 @@ internal object CalloutLayoutConstraintsCalculator {
     ): CalloutLayoutConstraints {
         val minWidth = when (alignment.vertical) {
             is CalloutAlignment.Vertical.Inner -> 0.dp
-            is CalloutAlignment.Vertical.Over -> 5.ccu
+            is CalloutAlignment.Vertical.Outer -> 5.ccu
         }.let {
             with(density) { it.toPx() }
         }
         val minHeight = when (alignment.horizontal) {
             is CalloutAlignment.Horizontal.Inner -> 0.dp
-            is CalloutAlignment.Horizontal.Over -> 5.ccu
+            is CalloutAlignment.Horizontal.Outer -> 5.ccu
         }.let {
             with(density) { it.toPx() }
         }
@@ -34,15 +34,15 @@ internal object CalloutLayoutConstraintsCalculator {
             CalloutAlignment.Horizontal.Start -> parentSize.width - anchorRectInParent.left
             CalloutAlignment.Horizontal.Center -> parentSize.width - abs(parentSize.width / 2f - anchorRectInParent.center.x)
             CalloutAlignment.Horizontal.End -> anchorRectInParent.right
-            CalloutAlignment.Horizontal.StartOver -> anchorRectInParent.left
-            CalloutAlignment.Horizontal.EndOver -> parentSize.width - anchorRectInParent.right
+            CalloutAlignment.Horizontal.StartOuter -> anchorRectInParent.left
+            CalloutAlignment.Horizontal.EndOuter -> parentSize.width - anchorRectInParent.right
         }
         val maxHeight = when (alignment.vertical) {
             CalloutAlignment.Vertical.Top -> parentSize.height - anchorRectInParent.top
             CalloutAlignment.Vertical.Center -> parentSize.height - abs(parentSize.height / 2f - anchorRectInParent.center.y)
             CalloutAlignment.Vertical.Bottom -> anchorRectInParent.bottom
-            CalloutAlignment.Vertical.TopOver -> anchorRectInParent.top
-            CalloutAlignment.Vertical.BottomOver -> parentSize.height - anchorRectInParent.bottom
+            CalloutAlignment.Vertical.TopOuter -> anchorRectInParent.top
+            CalloutAlignment.Vertical.BottomOuter -> parentSize.height - anchorRectInParent.bottom
         }
         return CalloutLayoutConstraints(
             minWidth = minWidth,

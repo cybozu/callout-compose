@@ -165,22 +165,22 @@ private fun Content(
                 elevation = calloutProperties.elevation
             )
             .padding(
-                top = if (alignmentContext.vertical is CalloutAlignment.Vertical.BottomOver) {
+                top = if (alignmentContext.vertical is CalloutAlignment.Vertical.BottomOuter) {
                     2.ccu
                 } else {
                     1.ccu
                 },
-                start = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.EndOver) {
+                start = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.EndOuter) {
                     2.ccu
                 } else {
                     1.ccu
                 },
-                bottom = if (alignmentContext.vertical is CalloutAlignment.Vertical.TopOver) {
+                bottom = if (alignmentContext.vertical is CalloutAlignment.Vertical.TopOuter) {
                     2.ccu
                 } else {
                     1.ccu
                 },
-                end = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.StartOver) {
+                end = if (alignmentContext.horizontal is CalloutAlignment.Horizontal.StartOuter) {
                     2.ccu
                 } else {
                     1.ccu

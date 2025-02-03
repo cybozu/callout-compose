@@ -11,7 +11,7 @@ public fun BasicCallout(
     contentColorProvider: LocalContentColorProvider = DefaultLocalContentColorProvider(),
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
-    verticalAlignment: CalloutAlignment.Vertical.Over,
+    verticalAlignment: CalloutAlignment.Vertical.Outer,
     horizontalAlignment: CalloutAlignment.Horizontal.Inner,
     onDismissRequest: (() -> Unit)? = null,
     content: @Composable () -> Unit,
@@ -35,7 +35,7 @@ public fun BasicCallout(
     calloutState: CalloutState,
     calloutProperties: CalloutProperties,
     verticalAlignment: CalloutAlignment.Vertical.Inner,
-    horizontalAlignment: CalloutAlignment.Horizontal.Over,
+    horizontalAlignment: CalloutAlignment.Horizontal.Outer,
     onDismissRequest: (() -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
