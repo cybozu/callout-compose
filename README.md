@@ -62,9 +62,9 @@ HorizontalAlignment is divided into Inner and Outer:
  - Outer: Start.outer(), End.outer()
 
 
-The combinations of VerticalAlignment and HorizontalAlignment can be specified as:
- - Inner × Outer
- - Outer × Inner"
+The available combinations of VerticalAlignment and HorizontalAlignment is:
+ - Inner（Vertical） × Outer（Horizontal）
+ - Outer（Vertical） × Inner（Horizontal）
 
 #### Show up Callout
 ```kotlin
