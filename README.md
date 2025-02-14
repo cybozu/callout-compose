@@ -17,15 +17,15 @@ TODO
 #### material3
 TODO
 
-### How to Use
+## How to Use
 
-#### Create callout state
+### Create callout state
 
 ```kotlin
 val calloutState = rememberCalloutState()
 ```
 
-#### Call Modifier.anchoredCallout to attach a callout to any Composable.
+### Call Modifier.anchoredCallout to attach a callout to any Composable.
 
 ```kotlin
 Text(
@@ -37,7 +37,7 @@ Text(
 )
 ```
 
-#### Wrap the Composable you want to display in the callout with Callout
+### Wrap the Composable you want to display in the callout with Callout
 
 ```kotlin
 Callout(
@@ -66,14 +66,14 @@ The available combinations of VerticalAlignment and HorizontalAlignment is:
  - Inner（Vertical） × Outer（Horizontal）
  - Outer（Vertical） × Inner（Horizontal）
 
-#### Show up Callout
+### Show up Callout
 ```kotlin
 LaunchedEffect(Unit) {
     calloutState.show()
 }
 ```
 
-#### Complete Example
+### Complete Example
 ```kotlin
 
 val calloutState = rememberCalloutState()
@@ -99,5 +99,13 @@ LaunchedEffect(Unit) {
 }
 ```
 
-### License
+## Demo
+
+This repository includes demonstration app.
+
+if you use material2, open [sample-app-material2](https://github.com/cybozu/callout-compose/tree/main/sample-app-material2) and Run it.
+
+if you use material3, open [sample-app-material3](https://github.com/cybozu/callout-compose/tree/main/sample-app-material3) and Run it.
+
+## License
 [License](https://github.com/cybozu/callout-compose/blob/main/LICENSE)
