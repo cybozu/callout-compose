@@ -73,7 +73,7 @@ LaunchedEffect(Unit) {
 }
 ```
 
-#### Conclusion
+#### Complete Example
 ```kotlin
 
 val calloutState = rememberCalloutState()
