@@ -98,3 +98,6 @@ LaunchedEffect(Unit) {
     calloutState.show()
 }
 ```
+
+### License
+[License](https://github.com/cybozu/callout-compose/blob/main/LICENSE)
