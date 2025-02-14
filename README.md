@@ -102,11 +102,11 @@ LaunchedEffect(Unit) {
 ## Preview
 |   |Top  |Center  |Bottom  |Top.outer()  |Bottom.outer()  |
 |---|---|---|---|---|---|
-|Start  |×  |×  |×  |3  |3  |
-|Center  |×  |× |× |3  |3  |
-|End  |×  |× |×  |3  |3  |
-|Start.outer()  |4  |5  |6  |×  |×  |
-|End.outer()  |4  |5  |6  |×  |×  |
+|Start  |×  |×  |×  |<img src="https://github.com/user-attachments/assets/dad889c9-74bb-4951-93e6-2e728765ced5" width="300"/>| <img src="https://github.com/user-attachments/assets/64235d7d-1672-4335-99ef-3a9ca2749c83" width="300"/>|
+|Center  |×  |× |× |<img src="" width="300"/>  |<img src="" width="300"/>  |
+|End  |×  |× |×  |<img src="" width="300"/>  |<img src="" width="300"/>  |
+|Start.outer()  |<img src="" width="300"/>  |<img src="" width="300"/>  |<img src="" width="300"/>  |×  |×  |
+|End.outer()  |<img src="" width="300"/>  |<img src="" width="300"/>  |<img src="" width="300"/>  |×  |×  |
 
 ## Demo
 
