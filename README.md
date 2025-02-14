@@ -99,6 +99,15 @@ LaunchedEffect(Unit) {
 }
 ```
 
+## Preview
+|   |Top  |Center  |Bottom  |Top.outer()  |Bottom.outer()  |
+|---|---|---|---|---|---|
+|Start  |×  |×  |×  |3  |3  |
+|Center  |×  |× |× |3  |3  |
+|End  |×  |× |×  |3  |3  |
+|Start.outer()  |4  |5  |6  |×  |×  |
+|End.outer()  |4  |5  |6  |×  |×  |
+
 ## Demo
 
 This repository includes demonstration app.
