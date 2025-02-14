@@ -100,7 +100,7 @@ LaunchedEffect(Unit) {
 ```
 
 ## Preview
-|   |Top  |Center  |Bottom  |Top.outer()  |Bottom.outer()  |
+|   |  Top  |Center  |Bottom  |Top.outer()  |Bottom.outer()  |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |Start  |×  |×  |×  |<img src="https://github.com/user-attachments/assets/dad889c9-74bb-4951-93e6-2e728765ced5" width="150"/>| <img src="https://github.com/user-attachments/assets/64235d7d-1672-4335-99ef-3a9ca2749c83" width="150"/>|
 |Center  |×  |× |× |<img src="https://github.com/user-attachments/assets/fc370c4b-2885-4bb8-87c2-2e58372147aa" width="150"/>  |<img src="https://github.com/user-attachments/assets/e695aa94-138b-4212-a8fe-14a3fe8971d2" width="150"/>  |
