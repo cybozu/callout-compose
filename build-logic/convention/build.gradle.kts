@@ -16,6 +16,7 @@ dependencies {
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.licensee.gradle.plugin)
     compileOnly(libs.ktlint.gradle.plugin)
+    compileOnly(libs.spotless.gradle.plugin)
     compileOnly(libs.roborazzi.gradle.plugin)
 }
 
