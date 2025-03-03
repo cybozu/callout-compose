@@ -34,3 +34,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
 }
+
+tasks.withType<com.android.build.gradle.tasks.JavaDocGenerationTask> {
+    enabled = false
+}

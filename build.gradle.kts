@@ -9,5 +9,6 @@ plugins {
     alias(libs.plugins.licensee) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.roborazzi) apply false
+    alias(libs.plugins.dokka) apply false
     alias(libs.plugins.maven.publish) apply false
 }

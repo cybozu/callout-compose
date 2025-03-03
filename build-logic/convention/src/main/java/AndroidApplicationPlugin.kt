@@ -15,6 +15,7 @@ class AndroidApplicationPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply(libs.getPluginId("android-application"))
                 apply(libs.getPluginId("kotlin-android"))
+                apply(libs.getPluginId("dokka"))
             }
 
             configureKotlinCommon()
