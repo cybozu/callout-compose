@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.callout.compose.jetpack.compose.core)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -32,4 +33,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+}
+
+tasks.withType<com.android.build.gradle.tasks.JavaDocGenerationTask> {
+    enabled = false
 }

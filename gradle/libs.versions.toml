@@ -1,6 +1,6 @@
 [versions]
-agp = "8.8.0"
-androidGradlePlugin = "8.8.0"
+agp = "8.8.2"
+androidGradlePlugin = "8.8.2"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -17,6 +17,10 @@ licensee = "1.12.0"
 ktlint = "1.3.1"
 ktlintGradle = "12.1.1"
 spotless = "6.25.0"
+
+dokka = "2.0.0"
+
+mavenPublish = "0.30.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +75,10 @@ spotless-gradle = { id = "com.diffplug.spotless", version.ref = "spotless" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 
 roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
+
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 
 callout-compose-android-application = { id = "com.cybozu.callout.compose.android.application" }
 callout-compose-android-library = { id = "com.cybozu.callout.compose.android.library" }
