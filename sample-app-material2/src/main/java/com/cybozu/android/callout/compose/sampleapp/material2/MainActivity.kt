@@ -101,9 +101,7 @@ private fun BoxScope.AnchoredCallout(
     calloutVerticalAlignment: CalloutAlignment.Vertical.Inner,
     calloutHorizontalAlignment: CalloutAlignment.Horizontal.Outer,
 ) {
-    val calloutState = rememberCalloutState(
-        isVisible = true
-    )
+    val calloutState = rememberCalloutState()
     Anchor(
         modifier = Modifier
             .align(anchorAlignment)
@@ -126,9 +124,7 @@ private fun BoxScope.AnchoredCallout(
     calloutVerticalAlignment: CalloutAlignment.Vertical.Outer,
     calloutHorizontalAlignment: CalloutAlignment.Horizontal.Inner,
 ) {
-    val calloutState = rememberCalloutState(
-        isVisible = true
-    )
+    val calloutState = rememberCalloutState()
     Anchor(
         modifier = Modifier
             .align(anchorAlignment)
