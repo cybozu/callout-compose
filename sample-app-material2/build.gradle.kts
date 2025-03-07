@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.material)
+    implementation(libs.androidx.material.icons)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -22,8 +22,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.toSize
 import com.cybozu.android.callout.compose.core.CalloutState
@@ -74,6 +74,6 @@ public fun Modifier.anchoredCallout(
     }
 
     stateImpl.parentSize = coordinates.parentCoordinates?.size?.toSize()
-    stateImpl.anchorPositionInWindow = coordinates.positionInWindow()
+    stateImpl.anchorRectInWindow = coordinates.boundsInWindow()
     stateImpl.anchorRectInParent = coordinates.boundsInParent()
 }

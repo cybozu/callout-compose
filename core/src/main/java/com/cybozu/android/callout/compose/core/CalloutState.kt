@@ -21,43 +21,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 
-public sealed interface CalloutState {
-    public fun show()
-    public fun hide()
-}
+public sealed interface CalloutState
 
-internal class CalloutStateImpl(
-    isVisible: Boolean = false,
-) : CalloutState {
-    var isVisible: Boolean by mutableStateOf(isVisible)
-        private set
+internal class CalloutStateImpl : CalloutState {
 
     val isAnchored by derivedStateOf {
-        parentSize != null && anchorPositionInWindow != null && anchorRectInParent != null
+        anchorRectInWindow != null && parentSize != null && anchorRectInParent != null
     }
+
+    var anchorRectInWindow: Rect? by mutableStateOf(null)
 
     var parentSize: Size? by mutableStateOf(null)
-    var anchorPositionInWindow: Offset? by mutableStateOf(null)
     var anchorRectInParent: Rect? by mutableStateOf(null)
-
-    override fun show() {
-        isVisible = true
-    }
-
-    override fun hide() {
-        isVisible = false
-    }
 }
 
 @Composable
-public fun rememberCalloutState(
-    isVisible: Boolean = false,
-): CalloutState = remember {
-    CalloutStateImpl(
-        isVisible = isVisible
-    )
+public fun rememberCalloutState(): CalloutState = remember {
+    CalloutStateImpl()
 }

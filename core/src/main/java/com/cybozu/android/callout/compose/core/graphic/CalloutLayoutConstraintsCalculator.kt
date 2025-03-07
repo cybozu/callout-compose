@@ -29,8 +29,8 @@ internal object CalloutLayoutConstraintsCalculator {
     fun calculate(
         density: Density,
         alignment: CalloutAlignmentContext,
-        parentSize: Size,
-        anchorRectInParent: Rect,
+        windowSize: Size,
+        anchorRectInWindow: Rect,
     ): CalloutLayoutConstraints {
         val minWidth = when (alignment.vertical) {
             is CalloutAlignment.Vertical.Inner -> 0.dp
@@ -46,18 +46,18 @@ internal object CalloutLayoutConstraintsCalculator {
         }
 
         val maxWidth = when (alignment.horizontal) {
-            CalloutAlignment.Horizontal.Start -> parentSize.width - anchorRectInParent.left
-            CalloutAlignment.Horizontal.Center -> parentSize.width - abs(parentSize.width / 2f - anchorRectInParent.center.x)
-            CalloutAlignment.Horizontal.End -> anchorRectInParent.right
-            CalloutAlignment.Horizontal.StartOuter -> anchorRectInParent.left
-            CalloutAlignment.Horizontal.EndOuter -> parentSize.width - anchorRectInParent.right
+            CalloutAlignment.Horizontal.Start -> windowSize.width - anchorRectInWindow.left
+            CalloutAlignment.Horizontal.Center -> windowSize.width - abs(windowSize.width / 2f - anchorRectInWindow.center.x)
+            CalloutAlignment.Horizontal.End -> anchorRectInWindow.right
+            CalloutAlignment.Horizontal.StartOuter -> anchorRectInWindow.left
+            CalloutAlignment.Horizontal.EndOuter -> windowSize.width - anchorRectInWindow.right
         }
         val maxHeight = when (alignment.vertical) {
-            CalloutAlignment.Vertical.Top -> parentSize.height - anchorRectInParent.top
-            CalloutAlignment.Vertical.Center -> parentSize.height - abs(parentSize.height / 2f - anchorRectInParent.center.y)
-            CalloutAlignment.Vertical.Bottom -> anchorRectInParent.bottom
-            CalloutAlignment.Vertical.TopOuter -> anchorRectInParent.top
-            CalloutAlignment.Vertical.BottomOuter -> parentSize.height - anchorRectInParent.bottom
+            CalloutAlignment.Vertical.Top -> windowSize.height - anchorRectInWindow.top
+            CalloutAlignment.Vertical.Center -> windowSize.height - abs(windowSize.height / 2f - anchorRectInWindow.center.y)
+            CalloutAlignment.Vertical.Bottom -> anchorRectInWindow.bottom
+            CalloutAlignment.Vertical.TopOuter -> anchorRectInWindow.top
+            CalloutAlignment.Vertical.BottomOuter -> windowSize.height - anchorRectInWindow.bottom
         }
         return CalloutLayoutConstraints(
             minWidth = minWidth,
