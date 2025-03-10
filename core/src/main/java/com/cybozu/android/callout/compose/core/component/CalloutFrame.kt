@@ -74,12 +74,16 @@ internal fun CalloutFrame(
         is CalloutStateImpl -> calloutState
     }
     val alpha by animateFloatAsState(
-        targetValue = if (stateImpl.isVisible && stateImpl.isAnchored) 1f else 0f,
+        targetValue = if (stateImpl.isAnchored) {
+            1f
+        } else {
+            0f
+        },
         label = "CalloutFrameAlpha",
         animationSpec = tween(durationMillis = calloutProperties.animationDurationMillis)
     )
 
-    if (stateImpl.isVisible && stateImpl.isAnchored) {
+    if (stateImpl.isAnchored) {
         val density = LocalDensity.current
         val popupLayoutContext = rememberPopupLayoutContext(
             parentSize = stateImpl.parentSize ?: Size.Zero,
@@ -102,7 +106,6 @@ internal fun CalloutFrame(
             popupLayoutContext = popupLayoutContext,
             calloutLayoutConstraints = calloutLayoutConstraints,
             onDismissRequest = {
-                calloutState.hide()
                 onDismissRequest?.let { it() }
             },
             content = content
@@ -249,9 +252,7 @@ private fun CalloutPreview(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        val state = rememberCalloutState(
-            isVisible = true
-        )
+        val state = rememberCalloutState()
         val anchorRectInParent = Rect(
             left = 100.dp.toPixel(),
             top = 100.dp.toPixel(),
