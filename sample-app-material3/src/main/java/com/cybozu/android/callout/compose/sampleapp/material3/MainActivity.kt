@@ -25,6 +25,10 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -53,6 +57,25 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             title = {
                                 Text(stringResource(R.string.app_name))
+                            },
+                            actions = {
+                                val calloutState = rememberCalloutState()
+                                IconButton(
+                                    modifier = Modifier.anchoredCallout(calloutState),
+                                    onClick = {}
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.MoreVert,
+                                        contentDescription = null
+                                    )
+                                }
+                                Callout(
+                                    calloutState = calloutState,
+                                    verticalAlignment = CalloutAlignment.Vertical.Bottom.outer(),
+                                    horizontalAlignment = CalloutAlignment.Horizontal.End
+                                ) {
+                                    Text(text = "Hello, Callout!")
+                                }
                             }
                         )
                     }

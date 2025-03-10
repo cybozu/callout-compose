@@ -27,11 +27,15 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,10 +59,30 @@ class MainActivity : ComponentActivity() {
                         .navigationBarsPadding(),
                     topBar = {
                         TopAppBar(
-                            modifier = Modifier.statusBarsPadding()
-                        ) {
-                            Text(stringResource(R.string.app_name))
-                        }
+                            modifier = Modifier.statusBarsPadding(),
+                            title = {
+                                Text(stringResource(R.string.app_name))
+                            },
+                            actions = {
+                                val calloutState = rememberCalloutState()
+                                IconButton(
+                                    modifier = Modifier.anchoredCallout(calloutState),
+                                    onClick = {}
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.MoreVert,
+                                        contentDescription = null
+                                    )
+                                }
+                                Callout(
+                                    calloutState = calloutState,
+                                    verticalAlignment = CalloutAlignment.Vertical.Bottom.outer(),
+                                    horizontalAlignment = CalloutAlignment.Horizontal.End
+                                ) {
+                                    Text(text = "Hello, Callout!")
+                                }
+                            }
+                        )
                     }
                 ) { innerPadding ->
                     CalloutScreen(

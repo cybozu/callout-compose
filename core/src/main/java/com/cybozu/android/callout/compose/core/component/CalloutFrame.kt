@@ -15,6 +15,7 @@
  */
 package com.cybozu.android.callout.compose.core.component
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -35,6 +36,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toComposeRect
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -44,6 +46,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import androidx.window.layout.WindowMetricsCalculator
 import com.cybozu.android.callout.compose.core.CalloutState
 import com.cybozu.android.callout.compose.core.CalloutStateImpl
 import com.cybozu.android.callout.compose.core.DefaultLocalContentColorProvider
@@ -85,6 +88,8 @@ internal fun CalloutFrame(
 
     if (stateImpl.isAnchored) {
         val density = LocalDensity.current
+        val windowSize = rememberWindowSize()
+
         val popupLayoutContext = rememberPopupLayoutContext(
             parentSize = stateImpl.parentSize ?: Size.Zero,
             anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero,
@@ -93,8 +98,8 @@ internal fun CalloutFrame(
         val calloutLayoutConstraints = rememberCalloutLayoutConstraints(
             density = density,
             alignment = alignmentContext,
-            parentSize = stateImpl.parentSize ?: Size.Zero,
-            anchorRectInParent = stateImpl.anchorRectInParent ?: Rect.Zero
+            windowSize = windowSize ?: Size.Zero,
+            anchorRectInWindow = stateImpl.anchorRectInWindow ?: Rect.Zero
         )
         CalloutFrameImpl(
             contentColorProvider = contentColorProvider,
@@ -210,6 +215,17 @@ private fun Content(
 }
 
 @Composable
+private fun rememberWindowSize(): Size? {
+    val activity = LocalActivity.current ?: return null
+    val metrics = remember(activity) {
+        WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)
+    }
+    return remember {
+        metrics.bounds.toComposeRect().size
+    }
+}
+
+@Composable
 private fun rememberPopupLayoutContext(
     parentSize: Size,
     anchorRectInParent: Rect,
@@ -226,14 +242,14 @@ private fun rememberPopupLayoutContext(
 private fun rememberCalloutLayoutConstraints(
     density: Density,
     alignment: CalloutAlignmentContext,
-    parentSize: Size,
-    anchorRectInParent: Rect,
-): CalloutLayoutConstraints = remember(density, parentSize, anchorRectInParent, alignment) {
+    windowSize: Size,
+    anchorRectInWindow: Rect,
+): CalloutLayoutConstraints = remember(density, windowSize, anchorRectInWindow, alignment) {
     CalloutLayoutConstraintsCalculator.calculate(
         density = density,
         alignment = alignment,
-        parentSize = parentSize,
-        anchorRectInParent = anchorRectInParent
+        windowSize = windowSize,
+        anchorRectInWindow = anchorRectInWindow
     )
 }
 
@@ -253,6 +269,12 @@ private fun CalloutPreview(
             .background(Color.White)
     ) {
         val state = rememberCalloutState()
+        val anchorRectInWindow = Rect(
+            left = 100.dp.toPixel(),
+            top = 100.dp.toPixel(),
+            right = 150.dp.toPixel(),
+            bottom = 150.dp.toPixel()
+        )
         val anchorRectInParent = Rect(
             left = 100.dp.toPixel(),
             top = 100.dp.toPixel(),
@@ -267,8 +289,8 @@ private fun CalloutPreview(
         val calloutLayoutConstraints = rememberCalloutLayoutConstraints(
             density = density,
             alignment = alignmentContext,
-            parentSize = Size(maxWidth.toPixel(), maxHeight.toPixel()),
-            anchorRectInParent = anchorRectInParent
+            windowSize = Size(maxWidth.toPixel(), maxHeight.toPixel()),
+            anchorRectInWindow = anchorRectInWindow
         )
 
         Box(
