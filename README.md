@@ -10,12 +10,23 @@ Using callout-compose, you can display callouts anywhere you want.
 ## Including in your project
 
 ### Gradle
+Add the dependency below to your **module**'s build.gradle file:
 
-#### material2
-TODO
+#### if you use material2
+```groovy
+dependencies {
+    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.2")
+    implementation("com.cybozu.callout.compose:callout-compose-material2:0.0.2")
+}
+```
 
-#### material3
-TODO
+#### if you use material3
+```groovy
+dependencies {
+    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.2")
+    implementation("com.cybozu.callout.compose:callout-compose-material3:0.0.2")
+}
+```
 
 ## How to Use
 
@@ -37,7 +48,7 @@ Text(
 )
 ```
 
-### Wrap the Composable you want to display in the callout with Callout
+### Wrap the Composable you want to display with Callout Composable
 
 ```kotlin
 Callout(
@@ -66,13 +77,6 @@ The available combinations of VerticalAlignment and HorizontalAlignment is:
  - Inner（Vertical） × Outer（Horizontal）
  - Outer（Vertical） × Inner（Horizontal）
 
-### Show up Callout
-```kotlin
-LaunchedEffect(Unit) {
-    calloutState.show()
-}
-```
-
 ### Complete Example
 ```kotlin
 
@@ -92,10 +96,6 @@ Callout(
     horizontalAlignment = CalloutAlignment.Horizontal.End.outer()
 ) {
     Text(text = "Hello, Callout!")
-}
-
-LaunchedEffect(Unit) {
-    calloutState.show()
 }
 ```
 
