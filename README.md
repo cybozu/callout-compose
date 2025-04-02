@@ -15,16 +15,16 @@ Add the dependency below to your **module**'s build.gradle file:
 #### if you use material2
 ```groovy
 dependencies {
-    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.2")
-    implementation("com.cybozu.callout.compose:callout-compose-material2:0.0.2")
+    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.21")
+    implementation("com.cybozu.callout.compose:callout-compose-material2:0.0.21")
 }
 ```
 
 #### if you use material3
 ```groovy
 dependencies {
-    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.2")
-    implementation("com.cybozu.callout.compose:callout-compose-material3:0.0.2")
+    implementation("com.cybozu.callout.compose:callout-compose-core:0.0.21")
+    implementation("com.cybozu.callout.compose:callout-compose-material3:0.0.21")
 }
 ```
 
