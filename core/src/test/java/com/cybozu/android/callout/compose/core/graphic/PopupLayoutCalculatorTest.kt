@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Cybozu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.cybozu.android.callout.compose.core.graphic
 
 import androidx.compose.ui.BiasAlignment
@@ -29,77 +44,77 @@ class PopupLayoutCalculatorTest {
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.TopOuter,
                 horizontal = CalloutAlignment.Horizontal.Center
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 0f, verticalBias = 1f),
                 offsetFromBaseline = Offset(-50f, -600f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.TopOuter,
                 horizontal = CalloutAlignment.Horizontal.End
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 1f, verticalBias = 1f),
                 offsetFromBaseline = Offset(x = -200f, y = -600f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.BottomOuter,
                 horizontal = CalloutAlignment.Horizontal.Start
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = -1f, verticalBias = -1f),
                 offsetFromBaseline = Offset(x = 100f, y = 500f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.BottomOuter,
                 horizontal = CalloutAlignment.Horizontal.Center
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 0f, verticalBias = -1f),
                 offsetFromBaseline = Offset(x = -50.0f, y = 500f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.BottomOuter,
                 horizontal = CalloutAlignment.Horizontal.End
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 1f, verticalBias = -1f),
                 offsetFromBaseline = Offset(x = -200f, y = 500f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Top,
                 horizontal = CalloutAlignment.Horizontal.StartOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 1.0f, verticalBias = -1f),
                 offsetFromBaseline = Offset(x = -300f, y = 400f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Center,
                 horizontal = CalloutAlignment.Horizontal.StartOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 1f, verticalBias = 0f),
                 offsetFromBaseline = Offset(x = -300f, y = -50f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Bottom,
                 horizontal = CalloutAlignment.Horizontal.StartOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = 1f, verticalBias = 1f),
                 offsetFromBaseline = Offset(x = -300f, y = -500f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Top,
                 horizontal = CalloutAlignment.Horizontal.EndOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = -1f, verticalBias = -1f),
                 offsetFromBaseline = Offset(x = 200.0f, y = 400f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Center,
                 horizontal = CalloutAlignment.Horizontal.EndOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = -1f, verticalBias = 0f),
                 offsetFromBaseline = Offset(x = 200f, y = -50f)
             ),
             CalloutAlignmentContext(
                 vertical = CalloutAlignment.Vertical.Bottom,
                 horizontal = CalloutAlignment.Horizontal.EndOuter
-            )to PopupLayoutContext(
+            ) to PopupLayoutContext(
                 alignment = BiasAlignment(horizontalBias = -1f, verticalBias = 1f),
                 offsetFromBaseline = Offset(x = 200f, y = -500f)
             )

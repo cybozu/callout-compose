@@ -3,7 +3,6 @@ package com.cybozu.android.callout.convention
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.dependencies
 
 fun Project.configureAndroidCommon(commonExtension: CommonExtension<*, *, *, *, *, *>) {
     commonExtension.apply {
@@ -12,16 +11,10 @@ fun Project.configureAndroidCommon(commonExtension: CommonExtension<*, *, *, *, 
         defaultConfig {
             minSdk = 27
         }
-        compileOptions {
-            isCoreLibraryDesugaringEnabled = true
-        }
 
         buildFeatures {
             buildConfig = true
         }
-    }
-    dependencies {
-        add("coreLibraryDesugaring", libs.findLibrary("desugar").get())
     }
 }
 
