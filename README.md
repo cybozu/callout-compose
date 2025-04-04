@@ -1,6 +1,11 @@
 ## callout-compose
 callout-compose is a Jetpack Compose library that allows you to easily display callout
 
+[![Github stars](https://img.shields.io/github/stars/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/stargazers)
+[![Github issues](https://img.shields.io/github/issues/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/issues)
+[![Github release](https://img.shields.io/github/v/release/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/releases)
+[![Github license](https://img.shields.io/github/license/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/blob/main/LICENSE)
+
 ## Requirements
  - minSdk version 27
 
