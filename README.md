@@ -6,6 +6,8 @@ callout-compose is a Jetpack Compose library that allows you to easily display c
 [![Github release](https://img.shields.io/github/v/release/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/releases)
 [![Github license](https://img.shields.io/github/license/cybozu/callout-compose)](https://github.com/cybozu/callout-compose/blob/main/LICENSE)
 
+<img src="https://github.com/user-attachments/assets/a74aa0bc-dd82-4071-9242-b1b370590331" width="700">
+
 ## Requirements
  - minSdk version 27
 
